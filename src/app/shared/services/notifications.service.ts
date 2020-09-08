@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FCM } from '@capacitor-community/fcm';
 import { Plugins, PushNotification, PushNotificationActionPerformed, PushNotificationToken } from '@capacitor/core';
-import { ModalController, Platform } from '@ionic/angular';
+import { AlertController, ModalController, Platform } from '@ionic/angular';
 
 import { CG44Notification } from '../models/notification';
 
@@ -17,7 +17,43 @@ export class NotificationsService {
 
   public readonly STORAGEKEY = 'is-subscribed';
 
-  constructor(private platform: Platform, private modalController: ModalController, private storageService: StorageService) { }
+  constructor(
+    private platform: Platform,
+    private modalController: ModalController,
+    private storageService: StorageService,
+    private alertController: AlertController
+  ) { }
+
+  async setup() {
+    const stored = await this.storageService.get(this.STORAGEKEY);
+    if (stored) {
+      this.register();
+    }
+    if (stored === null) {
+      this.askForSubscription();
+    }
+  }
+
+  /**
+   * Open an alert that ask the user if they want to subscribe to push notifications
+   */
+  async askForSubscription() {
+    const askAlert = await this.alertController.create({
+      header: 'Notifications',
+      message: 'Souhaitez-vous activer les notifications ?',
+      buttons: [{
+        text: 'Non merci',
+        role: 'cancel'
+      }, {
+        text: 'Ok',
+        handler: () => {
+          this.storageService.set(this.STORAGEKEY, true);
+          this.register();
+        }
+      }]
+    });
+    return await askAlert.present();
+  }
 
   /**
    * Subscribes to push notification in the "psn" topic
