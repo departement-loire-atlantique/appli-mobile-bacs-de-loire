@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Bacs de Loire</string>
+    <string name="title_activity_main">Bacs de Loire</string>
+    <string name="package_name">com.cg44.bacsloire</string>
+    <string name="custom_url_scheme">com.cg44.bacsloire</string>
+</resources>

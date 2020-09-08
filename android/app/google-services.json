@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "449146789897",
+    "firebase_url": "https://hybride-bacs-de-loire.firebaseio.com",
+    "project_id": "hybride-bacs-de-loire",
+    "storage_bucket": "hybride-bacs-de-loire.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449146789897:android:dba697606567bd2b1c98d8",
+        "android_client_info": {
+          "package_name": "com.cg44.bacsloire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "449146789897-ndpf6avo4mvu8nnbmkid5v9n02gr6jjj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkIkL5U9KPOKaoZvFWxK5Bt2QRMbVTlZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "449146789897-ndpf6avo4mvu8nnbmkid5v9n02gr6jjj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
