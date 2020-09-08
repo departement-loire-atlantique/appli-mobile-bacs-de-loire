@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { LiaisonPageRoutingModule } from './liaison-routing.module';
 
+import { BackButtonComponent } from 'src/app/shared/components/back-button/back-button.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { LiaisonPage } from './liaison.page';
 
 
@@ -14,10 +16,12 @@ import { LiaisonPage } from './liaison.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     LiaisonPageRoutingModule,
   ],
   declarations: [
     LiaisonPage,
+    BackButtonComponent
   ]
 })
 export class LiaisonPageModule {}

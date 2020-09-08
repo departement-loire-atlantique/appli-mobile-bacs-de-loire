@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { KEYCHOICE } from 'src/app/shared/models/constantesCD44';
+import { Liaison } from 'src/app/shared/models/liaison';
+import { StorageService } from 'src/app/shared/services/storage.service';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-liaison',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LiaisonPage implements OnInit {
 
-  constructor() { }
+  liaison: Liaison = new Liaison();
+  constructor(private utilService: UtilsService,
+              private storageService: StorageService) { }
 
   ngOnInit() {
+    this.storageService.get(KEYCHOICE).then(data => {
+      this.liaison = data;
+    });
+  }
+
+  async changeQuai(){
+    this.liaison = this.utilService.formatChoixQuai(this.liaison.to.toLocaleLowerCase());
+    await this.utilService.saveChoixQuai(this.liaison);
   }
 
 }

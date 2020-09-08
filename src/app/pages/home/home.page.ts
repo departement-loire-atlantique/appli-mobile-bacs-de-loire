@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilsService } from 'src/app/shared/services/utils.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  constructor(private utilService: UtilsService) { }
 
   ngOnInit() {
+    const liaison = this.utilService.formatChoixQuai('perturbation-c-lp');
+    this.utilService.saveChoixQuai(liaison);
   }
 
 }
