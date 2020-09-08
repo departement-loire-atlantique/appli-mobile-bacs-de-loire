@@ -3,8 +3,9 @@ import { FCM } from '@capacitor-community/fcm';
 import { Plugins, PushNotification, PushNotificationActionPerformed, PushNotificationToken } from '@capacitor/core';
 import { ModalController, Platform } from '@ionic/angular';
 
-import { StorageService } from './storage.service';
 import { CG44Notification } from '../models/notification';
+
+import { StorageService } from './storage.service';
 
 const { PushNotifications } = Plugins;
 const fcm = new FCM();
