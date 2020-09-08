@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import '@capacitor-community/http';
 import { HttpDownloadFileResult } from '@capacitor-community/http';
 import { FilesystemDirectory, Plugins } from '@capacitor/core';
+import { environment } from 'src/environments/environment';
 
-import { environment } from '../../environments/environment';
-import { ApiEvent } from '../models/event';
-import { ApiStatus } from '../models/status';
 
 const { Http, Filesystem } = Plugins;
 
@@ -16,45 +14,10 @@ export class ApiService {
 
   constructor() { }
 
-  async getPSNStatus(): Promise<ApiStatus> {
-    const response = await Http.request({
-      method: 'GET',
-      url: environment.apiUrl + '/psnstatus',
-      params: {
-        mode: 'no-cors'
-      }
-    });
-
-    return response.data;
-  }
-
-  async getEvents(): Promise<ApiEvent[]> {
-    const response = await Http.request({
-      method: 'GET',
-      url: environment.apiUrl + '/traficevents?filter=Pont%20de%20Saint-Nazaire',
-      params: {
-        mode: 'no-cors'
-      }
-    });
-
-    return response.data;
-  }
-
-  async getEvent(id: number): Promise<ApiEvent> {
-    const response = await Http.request({
-      method: 'GET',
-      url: environment.apiUrl + '/event/' + id,
-      params: {
-        mode: 'no-cors'
-      }
-    });
-
-    return response.data;
-  }
 
   async getLatestWebcam(): Promise<string> {
     const download: HttpDownloadFileResult = await Http.downloadFile({
-      url: environment.apiUrl + '/webcam?id=psn',
+      url: environment.apiUrl + '/webcam?id=bacsdeloire',
       filePath: 'webcam.jpg',
       fileDirectory: FilesystemDirectory.Data
     });

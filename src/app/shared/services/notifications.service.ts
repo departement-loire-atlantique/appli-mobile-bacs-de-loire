@@ -3,10 +3,8 @@ import { FCM } from '@capacitor-community/fcm';
 import { Plugins, PushNotification, PushNotificationActionPerformed, PushNotificationToken } from '@capacitor/core';
 import { ModalController, Platform } from '@ionic/angular';
 
-import { PushModalComponent } from '../components/push-modal/push-modal.component';
-import { CG44Notification } from '../models/notification';
-
 import { StorageService } from './storage.service';
+import { CG44Notification } from '../models/notification';
 
 const { PushNotifications } = Plugins;
 const fcm = new FCM();
@@ -94,7 +92,7 @@ export class NotificationsService {
       await current.dismiss();
     }
     const modal = await this.modalController.create({
-      component: PushModalComponent,
+      component: null,
       cssClass: 'notification-modal',
       componentProps: {
         notification

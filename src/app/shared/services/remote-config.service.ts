@@ -3,7 +3,7 @@ import '@capacitor-community/firebase-remote-config';
 import { Plugins } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 const { FirebaseRemoteConfig } = Plugins;
 
