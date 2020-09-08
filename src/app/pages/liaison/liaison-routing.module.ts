@@ -8,9 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: LiaisonPage,
-   
   },
-  
 ];
 
 @NgModule({
