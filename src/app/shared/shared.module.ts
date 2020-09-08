@@ -1,20 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 import { BackButtonComponent } from './components/back-button/back-button.component';
+import { PushModalComponent } from './components/push-modal/push-modal.component';
 
 @NgModule({
   declarations: [
-    BackButtonComponent
+    BackButtonComponent,
+    PushModalComponent,
   ],
   entryComponents: [
     BackButtonComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule
   ],
   exports: [
-    BackButtonComponent
+    BackButtonComponent,
+    PushModalComponent
   ]
 })
 export class SharedModule { }

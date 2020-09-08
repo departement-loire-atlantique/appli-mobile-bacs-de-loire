@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'liaison',
+    path: 'liaison/:id',
     loadChildren: () => import('./pages/liaison/liaison.module').then(m => m.LiaisonPageModule)
   },
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'notifications',
-    loadChildren: () => import('./pages/notifications/notifications.module').then( m => m.NotificationsPageModule)
+    loadChildren: () => import('./pages/notifications/notifications.module').then(m => m.NotificationsPageModule)
   }
 ];
 
