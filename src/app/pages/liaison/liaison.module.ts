@@ -8,13 +8,16 @@ import { LiaisonPageRoutingModule } from './liaison-routing.module';
 
 import { LiaisonPage } from './liaison.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LiaisonPageRoutingModule
+    LiaisonPageRoutingModule,
   ],
-  declarations: [LiaisonPage]
+  declarations: [
+    LiaisonPage,
+  ]
 })
 export class LiaisonPageModule {}
