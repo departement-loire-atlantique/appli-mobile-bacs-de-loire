@@ -1,0 +1,7 @@
+{
+  "name": "appli-mobile-bacs-de-loire",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
