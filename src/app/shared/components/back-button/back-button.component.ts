@@ -30,7 +30,7 @@ export class BackButtonComponent implements OnDestroy {
         this.menuController.close();
         break;
       default:
-        this.nav.back();
+        this.nav.pop();
         break;
     }
   }

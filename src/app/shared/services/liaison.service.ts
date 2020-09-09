@@ -64,11 +64,17 @@ export class LiaisonService {
     return currentLiaison[this.currentDirection + 'Params'];
   }
 
+  /**
+   * Returns the name of the start point according to the direction
+   */
   getStartPoint() {
     const currentLiaison = this.getCurrentLiaison();
     return currentLiaison.names[this.currentDirection === 'north' ? 'south' : 'north'];
   }
 
+  /**
+   * Returns the name of the end point according to the direction
+   */
   getEndPoint() {
     const currentLiaison = this.getCurrentLiaison();
     return currentLiaison.names[this.currentDirection];
