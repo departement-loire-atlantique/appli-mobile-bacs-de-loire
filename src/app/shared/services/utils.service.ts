@@ -13,11 +13,7 @@ export class UtilsService {
 
   constructor(private activatedRoute: ActivatedRoute) { }
 
-  getCurrentLiaison() {
-    return this.activatedRoute.snapshot.firstChild.paramMap.get('id');
-  }
-
-  getEventsList(apiEvents?: ApiEvent[]): Pertubation[]{
+  getEventsList(apiEvents?: ApiEvent[]): Pertubation[] {
     // TODO : Remplacer EVENT_MOCK par apiEvents
     return EVENTS_BDL.map(event => {
       return this.formatEvent(event);
@@ -31,7 +27,7 @@ export class UtilsService {
 
     if (apiEvent.type === 'Incident') {
       icon = 'accident';
-    } else if (apiEvent.type === 'Vent fort'){
+    } else if (apiEvent.type === 'Vent fort') {
       icon = 'vent-fort';
     } else {
       icon = 'particulier';
@@ -55,12 +51,12 @@ export class UtilsService {
   getCurrentHoraire(from: string, horaire: Horaire): CurrentHoraire {
     const currentHoraire: CurrentHoraire = new CurrentHoraire();
     if (from === 'Couëron' || from === 'Basse-Indre') {
-         currentHoraire.firstDepart = horaire.from_first;
-         currentHoraire.lastDepart = horaire.from_last;
-     } else {
-         currentHoraire.firstDepart = horaire.to_first;
-         currentHoraire.lastDepart = horaire.to_last;
-     }
+      currentHoraire.firstDepart = horaire.from_first;
+      currentHoraire.lastDepart = horaire.from_last;
+    } else {
+      currentHoraire.firstDepart = horaire.to_first;
+      currentHoraire.lastDepart = horaire.to_last;
+    }
     currentHoraire.period = horaire.from_period.charAt(0).toUpperCase() + horaire.from_period.slice(1);
     currentHoraire.message = horaire.from_message;
     return currentHoraire;
