@@ -18,14 +18,6 @@ export class AppComponent {
     {
       title: 'Notifications',
       url: '/notifications'
-    },
-    {
-      title: 'Liaison Couëron - Le Pellerin',
-      url: '/liaison/clp'
-    },
-    {
-      title: 'Liaison Basse-Indre - Indret',
-      url: '/liaison/bii'
     }
   ];
 
