@@ -1,0 +1,34 @@
+:host {
+  ion-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    --background: transparent;
+  }
+
+  ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+  }
+
+  .menu-button {
+    padding: 8px;
+    font-size: 1.6em;
+
+    i {
+      width: 1em;
+      height: 1em;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &::before {
+        line-height: 1;
+        font-size: 1em;
+      }
+    }
+  }
+}
