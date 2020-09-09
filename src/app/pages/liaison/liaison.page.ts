@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { LiaisonService } from '../../shared/services/liaison.service';
 
@@ -7,16 +7,18 @@ import { LiaisonService } from '../../shared/services/liaison.service';
   templateUrl: './liaison.page.html',
   styleUrls: ['./liaison.page.scss'],
 })
-export class LiaisonPage implements OnInit {
+export class LiaisonPage implements OnInit, OnDestroy {
 
   public startPoint: string;
   public endPoint: string;
+
+  private subscription: any;
 
   constructor(private liaisonService: LiaisonService) { }
 
   ngOnInit() {
     // Subscribe to direction change event
-    this.liaisonService.currentDirectionObserver.subscribe(() => {
+    this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
       console.log(this.liaisonService.getCurrentLiaisonData());
       this.startPoint = this.liaisonService.getStartPoint();
       this.endPoint = this.liaisonService.getEndPoint();
@@ -25,6 +27,10 @@ export class LiaisonPage implements OnInit {
 
   async changeQuai() {
     this.liaisonService.changeDirection();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
