@@ -9,3 +9,10 @@ export class Horaire {
     to_last: string;
 }
 
+export class CurrentHoraire {
+  firstDepart: string;
+  period: string;
+  message: string;
+  lastDepart: string;
+}
+

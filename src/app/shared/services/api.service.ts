@@ -27,7 +27,7 @@ export class ApiService {
     return response.data;
   }
 
-  async getHoraireBacs(): Promise<any> {
+  async getHoraireBacs(typeLiaison: string): Promise<any> {
     const response = await Http.request({
       method: 'GET',
       url: environment.apiUrlHoraire,
@@ -35,7 +35,7 @@ export class ApiService {
         mode: 'no-cors'
       }
     });
-    return response.data;
+    return response.data.bacs_horaires[typeLiaison];
   }
 
   async getLatestWebcam(typeWebcam: string): Promise<string> {

@@ -14,6 +14,7 @@ import { LiaisonPage } from './liaison.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     LiaisonPageRoutingModule,
   ],
   declarations: [

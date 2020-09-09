@@ -2,31 +2,24 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
-import { EVENTS_BDL, KEYCHOICE } from '../models/constantesCD44';
+import { EVENTS_BDL } from '../models/constantesCD44';
 import { ApiEvent, Pertubation } from '../models/event';
-import { Liaison } from '../models/liaison';
-
-import { StorageService } from './storage.service';
+import { CurrentHoraire, Horaire } from '../models/horaire';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
-  constructor(private storageService: StorageService,
-              private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   getCurrentLiaison() {
     return this.activatedRoute.snapshot.firstChild.paramMap.get('id');
   }
 
-  async saveChoixQuai(liaison: Liaison){
-    await this.storageService.set(KEYCHOICE, liaison);
-  }
-
   getTraficEventURL(from: string, to: string): string {
-    const filter = encodeURI(`${from} - ${to}`);
-    return environment.apiUrlEvent + filter;
+    const url = environment.apiUrlEvent + encodeURI(`${from} - ${to}`);
+    return  url;
   }
 
   getEventsList(apiEvents?: ApiEvent[]): Pertubation[]{
@@ -62,5 +55,19 @@ export class UtilsService {
       ligne5: apiEvent.ligne5,
       ligne6: apiEvent.ligne6
     };
+  }
+
+  getCurrentHoraire(from: string, horaire: Horaire): CurrentHoraire {
+    const currentHoraire: CurrentHoraire = new CurrentHoraire();
+    if (from === 'Couëron' || from === 'Basse-Indre') {
+         currentHoraire.firstDepart = horaire.from_first;
+         currentHoraire.lastDepart = horaire.from_last;
+     } else {
+         currentHoraire.firstDepart = horaire.to_first;
+         currentHoraire.lastDepart = horaire.to_last;
+     }
+    currentHoraire.period = horaire.from_period.charAt(0).toUpperCase() + horaire.from_period.slice(1);
+    currentHoraire.message = horaire.from_message;
+    return currentHoraire;
   }
 }
