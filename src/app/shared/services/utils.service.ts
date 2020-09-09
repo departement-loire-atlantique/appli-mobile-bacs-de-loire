@@ -18,7 +18,7 @@ export class UtilsService {
   }
 
   getTraficEventURL(from: string, to: string): string {
-    const url = environment.apiUrlEvent + encodeURI(`${from} - ${to}`);
+    const url = environment.apiUrl + '/traficevents?filter=Bac%20de%20Loire%20' + encodeURI(`${from} - ${to}`);
     return  url;
   }
 

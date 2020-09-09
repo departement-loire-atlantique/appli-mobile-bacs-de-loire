@@ -40,7 +40,7 @@ export class ApiService {
 
   async getLatestWebcam(typeWebcam: string): Promise<string> {
     const download: HttpDownloadFileResult = await Http.downloadFile({
-      url: environment.apiUrlEvent + `/webcam?id=${typeWebcam}`,
+      url: environment.apiUrl + `/webcam?id=${typeWebcam}`,
       filePath: 'webcam.jpg',
       fileDirectory: FilesystemDirectory.Data
     });
