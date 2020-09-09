@@ -14,22 +14,20 @@ import { LiaisonService } from '../../shared/services/liaison.service';
 })
 export class PertubationPage implements OnInit {
 
-  public params: any;
   currentEvents: Pertubation[];
   upcomingEvents: Pertubation[];
   eventsList: Pertubation[];
 
   constructor(private utilService: UtilsService,
               private apiService: ApiService,
-              private storageService: StorageService,
               private liaisonService: LiaisonService
     ) { }
 
   ngOnInit() {
     this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.params = this.liaisonService.getCurrent();
-      console.log('params ', this.params);
-      const urlEvent = this.utilService.getTraficEventURL(this.params.from, this.params.to);
+      const params = this.liaisonService.getCurrent();
+      console.log('params ', params);
+      const urlEvent = this.utilService.getTraficEventURL(params.from, params.to);
       this.getData(urlEvent);
     });
   }

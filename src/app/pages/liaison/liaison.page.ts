@@ -20,9 +20,10 @@ export class LiaisonPage implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.activatedRoute.paramMap.subscribe(params => {
-      const id = params.get('id');
-      console.log(params, id);
+    this.liaisonService.currentDirectionObserver.subscribe(() => {
+      const params = this.liaisonService.getCurrent();
+      this.startPoint = params.from;
+      this.endPoint = params.to;
     });
   }
 
@@ -31,7 +32,6 @@ export class LiaisonPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
 }

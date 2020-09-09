@@ -1,9 +1,38 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>horaire</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div class="ds44--l-padding">
+    <section class="ds44-app-tuile ds44-app-tuile__bacs">
+      <h3 class="h3-like">Premier départ</h3>
+      <div class="ds44-mb2 ds44-lightBG">
+        <div class="ds44-bacs-horaires-container">
+          <p class="ds44-bacs-horaire ds44-center">{{currentHoraire?.firstDepart}}</p>
+        </div>
+      </div>
+    </section>
+  
+    <section class="ds44-app-tuile ds44-app-tuile__bacs">
+      <h3 class="h3-like">Ensuite</h3>
+      <div class="ds44-mb2 ds44-lightBG">
+        <div class="ds44-bacs-horaires-container">
+          <p class="ds44-bacs-horaire ds44-center">
+            {{currentHoraire?.period}}
+          </p>
+        </div>     
+      </div>
+    </section>
+  
+    <section class="ds44-app-tuile ds44-app-tuile__bacs">
+      <h3 class="h3-like">Dernier départ</h3>
+  
+      <div class="ds44-mb2 ds44-lightBG">
+        <div class="ds44-bacs-horaires-container">
+          <p class="ds44-bacs-horaire ds44-center">{{currentHoraire?.lastDepart}}</p>
+        </div>
+        <div class="ds44-whiteBG ds44-gray-border ds44--m-padding ds44-center" *ngIf="currentHoraire?.message">
+          <p>
+            {{currentHoraire?.message}}
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
 </ion-content>
