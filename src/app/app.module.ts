@@ -1,4 +1,6 @@
-import { NgModule } from '@angular/core';
+import { registerLocaleData, CommonModule } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -8,6 +10,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
   providers: [
     StatusBar,
     SplashScreen,
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

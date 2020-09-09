@@ -18,7 +18,6 @@ import { LiaisonPage } from './liaison.page';
   ],
   declarations: [
     LiaisonPage,
-    BackButtonComponent
   ]
 })
 export class LiaisonPageModule {}

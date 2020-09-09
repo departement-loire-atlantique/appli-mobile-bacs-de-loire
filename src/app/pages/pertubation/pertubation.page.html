@@ -1,5 +1,22 @@
+
 <ion-content>
-  <pre>
-    {{params | json}}
-  </pre>
+  <div class="ds44--l-padding">
+    <p *ngIf="!eventsList?.length">
+      Il n’y a actuellement aucune perturbation.
+    </p>
+    <section class="ds44-app-tuile" *ngIf="currentEvents?.length">
+      <h3 class="h3-like">Pertubation en cours</h3>
+      <app-pertubations
+        *ngFor="let evenement of currentEvents"
+        [pertubation]="evenement"
+      ></app-pertubations>
+    </section>
+    <section class="ds44-app-tuile" *ngIf="upcomingEvents?.length">
+      <h3 class="h3-like">Pertubation à venir</h3>
+      <app-pertubations
+        *ngFor="let evenement of upcomingEvents"
+        [pertubation]="evenement"
+      ></app-pertubations>
+    </section>
+  </div>
 </ion-content>

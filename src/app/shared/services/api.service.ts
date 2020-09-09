@@ -4,6 +4,8 @@ import { HttpDownloadFileResult } from '@capacitor-community/http';
 import { FilesystemDirectory, Plugins } from '@capacitor/core';
 import { environment } from 'src/environments/environment';
 
+import { ApiEvent } from '../models/event';
+
 
 const { Http, Filesystem } = Plugins;
 
@@ -14,10 +16,31 @@ export class ApiService {
 
   constructor() { }
 
+  async getEvent(urlEvent: string): Promise<ApiEvent[]> {
+    const response = await Http.request({
+      method: 'GET',
+      url: urlEvent,
+      params: {
+        mode: 'no-cors'
+      }
+    });
+    return response.data;
+  }
 
-  async getLatestWebcam(): Promise<string> {
+  async getHoraireBacs(): Promise<any> {
+    const response = await Http.request({
+      method: 'GET',
+      url: environment.apiUrlHoraire,
+      params: {
+        mode: 'no-cors'
+      }
+    });
+    return response.data;
+  }
+
+  async getLatestWebcam(typeWebcam: string): Promise<string> {
     const download: HttpDownloadFileResult = await Http.downloadFile({
-      url: environment.apiUrl + '/webcam?id=bacsdeloire',
+      url: environment.apiUrlEvent + `/webcam?id=${typeWebcam}`,
       filePath: 'webcam.jpg',
       fileDirectory: FilesystemDirectory.Data
     });

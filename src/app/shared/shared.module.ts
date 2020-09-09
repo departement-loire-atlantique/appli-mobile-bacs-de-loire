@@ -3,13 +3,18 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 import { BackButtonComponent } from './components/back-button/back-button.component';
+import { PertubationsComponent } from './components/pertubations/pertubations.component';
 import { PushModalComponent } from './components/push-modal/push-modal.component';
+
+
 
 @NgModule({
   declarations: [
     BackButtonComponent,
-    PushModalComponent,
+    PertubationsComponent,
+    PushModalComponent
   ],
+  providers: [],
   entryComponents: [
     BackButtonComponent
   ],
@@ -19,7 +24,8 @@ import { PushModalComponent } from './components/push-modal/push-modal.component
   ],
   exports: [
     BackButtonComponent,
-    PushModalComponent
+    PushModalComponent,
+    PertubationsComponent
   ]
 })
 export class SharedModule { }

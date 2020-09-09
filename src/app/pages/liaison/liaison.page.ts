@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { LiaisonService } from '../../shared/services/liaison.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-liaison',
@@ -14,14 +15,14 @@ export class LiaisonPage implements OnInit, OnDestroy {
 
   private subscription: any;
 
-  constructor(private liaisonService: LiaisonService) { }
+  constructor(private liaisonService: LiaisonService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    // Subscribe to direction change event
-    this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      console.log(this.liaisonService.getCurrent());
-      this.startPoint = this.liaisonService.getStartPoint();
-      this.endPoint = this.liaisonService.getEndPoint();
+
+    this.activatedRoute.paramMap.subscribe(params => {
+      const id = params.get('id');
+      console.log(params, id);
     });
   }
 
