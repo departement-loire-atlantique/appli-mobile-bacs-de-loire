@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { KEYCHOICE } from 'src/app/shared/models/constantesCD44';
 import { Pertubation } from 'src/app/shared/models/event';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
-import { UtilsService } from 'src/app/shared/services/utils.service';
+
+import { UtilsService } from '../../shared/services/utils.service';
 
 @Component({
   selector: 'app-pertubation',
@@ -20,7 +20,10 @@ export class PertubationPage implements OnInit {
   constructor(private utilService: UtilsService,
               private apiService: ApiService,
               private storageService: StorageService,
-              private modalController: ModalController) { }
+              ) {
+                const currentID = this.utilService.getCurrentLiaison();
+                console.log('currentID ', currentID);
+              }
 
   ngOnInit() {
     this.storageService.get(KEYCHOICE).then(data => {

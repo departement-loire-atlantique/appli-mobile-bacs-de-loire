@@ -6,7 +6,16 @@ export const environment = {
   production: false,
   apiUrlEvent: 'https://api.loire-atlantique.fr/opendata/1.0/traficevents?filter=Bac%20de%20Loire%20',
   apiUrlHoraire: 'https://api.loire-atlantique.fr/bacspsn_android/1.0/traficparameter?id=bacs_horaires',
-  firebaseConfig: {}
+  firebaseConfig: {
+    apiKey: 'AIzaSyB9cig_VWGYD9oGn5x6Gg-mY9kN6gORV-M',
+    authDomain: 'hybride-bacs-de-loire.firebaseapp.com',
+    databaseURL: 'https://hybride-bacs-de-loire.firebaseio.com',
+    projectId: 'hybride-bacs-de-loire',
+    storageBucket: 'hybride-bacs-de-loire.appspot.com',
+    messagingSenderId: '449146789897',
+    appId: '1:449146789897:web:4a76a721edfc535f1c98d8',
+    measurementId: 'G-NCXJSBN15N'
+  }
 };
 
 /*

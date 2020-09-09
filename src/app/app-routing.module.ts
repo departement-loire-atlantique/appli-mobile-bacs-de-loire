@@ -9,17 +9,20 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'liaison',
-    loadChildren: () => import('./pages/liaison/liaison.module').then( m => m.LiaisonPageModule)
+    path: 'liaison/:id',
+    loadChildren: () => import('./pages/liaison/liaison.module').then(m => m.LiaisonPageModule)
   },
   {
-    path: 'notification',
-    loadChildren: () => import('./pages/notification/notification.module').then( m => m.NotificationPageModule)
+    path: 'content-page',
+    loadChildren: () => import('./pages/content-page/content-page.module').then(m => m.ContentPagePageModule)
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./pages/notifications/notifications.module').then(m => m.NotificationsPageModule)
   }
-
 ];
 
 @NgModule({
@@ -28,4 +31,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

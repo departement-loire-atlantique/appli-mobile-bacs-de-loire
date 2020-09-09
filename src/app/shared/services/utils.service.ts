@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { ActivatedRoute } from '@angular/router';
 
-import { KEYCHOICE, EVENTS_BDL } from '../models/constantesCD44';
+import { EVENTS_BDL, KEYCHOICE } from '../models/constantesCD44';
 import { ApiEvent, Pertubation } from '../models/event';
 import { Liaison } from '../models/liaison';
 
 import { StorageService } from './storage.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
-  constructor(private storageService: StorageService) { }
+  constructor(private storageService: StorageService,
+              private activatedRoute: ActivatedRoute) { }
 
   formatChoixQuai(choix: string): Liaison {
     console.log('choix ', choix);
@@ -43,6 +45,10 @@ export class UtilsService {
       liaison.codeBus = 'BIND';
     }
     return liaison;
+  }
+
+  getCurrentLiaison() {
+    return this.activatedRoute.snapshot.firstChild.paramMap.get('id');
   }
 
   async saveChoixQuai(liaison: Liaison){

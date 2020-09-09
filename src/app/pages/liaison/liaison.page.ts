@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { KEYCHOICE } from 'src/app/shared/models/constantesCD44';
 import { Liaison } from 'src/app/shared/models/liaison';
 import { StorageService } from 'src/app/shared/services/storage.service';
@@ -13,12 +14,17 @@ export class LiaisonPage implements OnInit {
 
   liaison: Liaison = new Liaison();
   constructor(private utilService: UtilsService,
-              private storageService: StorageService) { }
+              private storageService: StorageService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.storageService.get(KEYCHOICE).then(data => {
       this.liaison = data;
       console.log('this.liaison ', this.liaison);
+    });
+    this.activatedRoute.paramMap.subscribe(params => {
+      const id = params.get('id');
+      console.log(params, id);
     });
   }
 
