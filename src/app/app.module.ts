@@ -7,10 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
-=======
 import { SharedModule } from './shared/shared.module';
->>>>>>> 3ed34433c10bb5867ea238beff8cf0d619ece2fb
 
 @NgModule({
   declarations: [AppComponent],

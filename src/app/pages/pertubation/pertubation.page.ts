@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UtilsService } from '../../shared/services/utils.service';
+import { LiaisonService } from '../../shared/services/liaison.service';
 
 @Component({
   selector: 'app-pertubation',
@@ -9,12 +9,17 @@ import { UtilsService } from '../../shared/services/utils.service';
 })
 export class PertubationPage implements OnInit {
 
-  constructor(private utils: UtilsService) {
-    const currentID = this.utils.getCurrentLiaison();
-    console.log(currentID);
+  private params: any;
+
+  constructor(private liaisonService: LiaisonService) {
   }
 
   ngOnInit() {
+    this.params = this.liaisonService.getCurrentDirection();
+
+    this.liaisonService.currentDirectionObserver.subscribe(() => {
+      this.params = this.liaisonService.getCurrentDirection();
+    });
   }
 
 }

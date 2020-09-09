@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilsService } from 'src/app/shared/services/utils.service';
+import { Router } from '@angular/router';
+
+import { LiaisonService } from '../../shared/services/liaison.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +10,13 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(private utilService: UtilsService) { }
+  constructor(private liaisonService: LiaisonService, private router: Router) { }
 
-  ngOnInit() {
-    const liaison = this.utilService.formatChoixQuai('perturbation-c-lp');
-    this.utilService.saveChoixQuai(liaison);
+  ngOnInit() { }
+
+  openLiaison(id: string, direction: string) {
+    this.liaisonService.chooseLiaison(id, direction);
+    this.router.navigateByUrl('liaison/' + id);
   }
 
 }

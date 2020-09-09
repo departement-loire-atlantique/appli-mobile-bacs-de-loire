@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { KEYCHOICE } from 'src/app/shared/models/constantesCD44';
-import { Liaison } from 'src/app/shared/models/liaison';
-import { StorageService } from 'src/app/shared/services/storage.service';
-import { UtilsService } from 'src/app/shared/services/utils.service';
+
+import { LiaisonService } from '../../shared/services/liaison.service';
 
 @Component({
   selector: 'app-liaison',
@@ -12,24 +9,24 @@ import { UtilsService } from 'src/app/shared/services/utils.service';
 })
 export class LiaisonPage implements OnInit {
 
-  liaison: Liaison = new Liaison();
-  constructor(private utilService: UtilsService,
-              private storageService: StorageService,
-              private activatedRoute: ActivatedRoute) { }
+  public startPoint: string;
+  public endPoint: string;
+
+  constructor(private liaisonService: LiaisonService) { }
 
   ngOnInit() {
-    this.storageService.get(KEYCHOICE).then(data => {
-      this.liaison = data;
-    });
-    this.activatedRoute.paramMap.subscribe(params => {
-      const id = params.get('id');
-      console.log(params, id);
+    this.startPoint = this.liaisonService.getStartPoint();
+    this.endPoint = this.liaisonService.getEndPoint();
+
+    // Subscribe to direction change event
+    this.liaisonService.currentDirectionObserver.subscribe(() => {
+      this.startPoint = this.liaisonService.getStartPoint();
+      this.endPoint = this.liaisonService.getEndPoint();
     });
   }
 
-  async changeQuai(){
-    this.liaison = this.utilService.formatChoixQuai(this.liaison.to.toLocaleLowerCase());
-    await this.utilService.saveChoixQuai(this.liaison);
+  async changeQuai() {
+    this.liaisonService.changeDirection();
   }
 
 }

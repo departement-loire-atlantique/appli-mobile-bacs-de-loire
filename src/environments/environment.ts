@@ -14,7 +14,39 @@ export const environment = {
     messagingSenderId: '449146789897',
     appId: '1:449146789897:web:4a76a721edfc535f1c98d8',
     measurementId: 'G-NCXJSBN15N'
-  }
+  },
+  liaisons: [
+    {
+      id: 'clp',
+      names: {
+        north: 'Couëron',
+        south: 'Le Pellerin'
+      },
+      northParams: {
+        webcamIds: ['coueron1', 'coueron2'],
+        codeBus: 'CBAC'
+      },
+      southParams: {
+        webcamIds: ['coueron1', 'coueron2'],
+        codeBus: 'LPBA'
+      }
+    },
+    {
+      id: 'bii',
+      names: {
+        north: 'Basse-Indre',
+        south: 'Indret'
+      },
+      northParams: {
+        webcamIds: ['indre1', 'indre2'],
+        codeBus: 'BIND'
+      },
+      southParams: {
+        webcamIds: ['indre1', 'indre2'],
+        codeBus: 'BIND'
+      }
+    }
+  ]
 };
 
 /*
