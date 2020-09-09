@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
@@ -15,15 +15,14 @@ export class LiaisonService {
 
   public currentLiaisonId: any;
   public currentDirection: string;
-  public currentDirectionObserver = new Subject();
 
-  constructor(private storageService: StorageService, private router: Router) { }
+  public readonly currentDirectionObserver = new BehaviorSubject('south');
+
+  constructor(private router: Router) { }
 
   chooseLiaison(id: string, direction?: string) {
     this.currentLiaisonId = id;
-    this.currentDirection = direction || 'north';
-
-    this.storeCurrentChoice();
+    this.currentDirection = direction || 'south';
   }
 
   openLiaison(id: string, direction?: string) {
@@ -37,22 +36,6 @@ export class LiaisonService {
   changeDirection() {
     this.currentDirection = this.currentDirection === 'north' ? 'south' : 'north';
     this.currentDirectionObserver.next(this.currentDirection);
-
-    this.storeCurrentChoice();
-  }
-
-  async storeCurrentChoice() {
-    await this.storageService.set(this.STORAGEKEY, {
-      liaison: this.currentLiaisonId,
-      direction: this.currentDirection
-    });
-  }
-
-  async setCurrentChoice() {
-    const { liaison, direction } = await this.storageService.get(this.STORAGEKEY);
-
-    this.currentLiaisonId = liaison;
-    this.currentDirection = direction;
   }
 
   getCurrentLiaison() {
@@ -61,7 +44,7 @@ export class LiaisonService {
 
   getCurrentDirection() {
     const currentLiaison = this.getCurrentLiaison();
-    return currentLiaison[this.currentDirection + 'Params'];
+    return currentLiaison[this.currentDirection === 'north' ? 'south' : 'north'];
   }
 
   /**
@@ -69,7 +52,7 @@ export class LiaisonService {
    */
   getStartPoint() {
     const currentLiaison = this.getCurrentLiaison();
-    return currentLiaison.names[this.currentDirection === 'north' ? 'south' : 'north'];
+    return currentLiaison[this.currentDirection === 'north' ? 'south' : 'north'].name;
   }
 
   /**
@@ -77,6 +60,14 @@ export class LiaisonService {
    */
   getEndPoint() {
     const currentLiaison = this.getCurrentLiaison();
-    return currentLiaison.names[this.currentDirection];
+    return currentLiaison[this.currentDirection].name;
+  }
+
+  getCurrentLiaisonData() {
+    return {
+      from: this.getStartPoint(),
+      to: this.getEndPoint(),
+      data: this.getCurrentDirection()
+    };
   }
 }

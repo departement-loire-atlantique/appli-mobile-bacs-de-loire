@@ -15,11 +15,9 @@ export class LiaisonPage implements OnInit {
   constructor(private liaisonService: LiaisonService) { }
 
   ngOnInit() {
-    this.startPoint = this.liaisonService.getStartPoint();
-    this.endPoint = this.liaisonService.getEndPoint();
-
     // Subscribe to direction change event
     this.liaisonService.currentDirectionObserver.subscribe(() => {
+      console.log(this.liaisonService.getCurrentLiaisonData());
       this.startPoint = this.liaisonService.getStartPoint();
       this.endPoint = this.liaisonService.getEndPoint();
     });

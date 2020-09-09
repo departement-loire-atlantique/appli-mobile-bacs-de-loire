@@ -18,30 +18,26 @@ export const environment = {
   liaisons: [
     {
       id: 'clp',
-      names: {
-        north: 'Couëron',
-        south: 'Le Pellerin'
-      },
-      northParams: {
+      north: {
+        name: 'Couëron',
         webcamIds: ['coueron1', 'coueron2'],
         codeBus: 'CBAC'
       },
-      southParams: {
+      south: {
+        name: 'Le Pellerin',
         webcamIds: ['coueron1', 'coueron2'],
         codeBus: 'LPBA'
       }
     },
     {
       id: 'bii',
-      names: {
-        north: 'Basse-Indre',
-        south: 'Indret'
-      },
-      northParams: {
+      north: {
+        name: 'Basse-Indre',
         webcamIds: ['indre1', 'indre2'],
         codeBus: 'BIND'
       },
-      southParams: {
+      south: {
+        name: 'Indret',
         webcamIds: ['indre1', 'indre2'],
         codeBus: 'BIND'
       }
