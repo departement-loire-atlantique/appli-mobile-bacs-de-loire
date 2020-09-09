@@ -9,7 +9,7 @@ import { LiaisonService } from '../../shared/services/liaison.service';
 })
 export class PertubationPage implements OnInit {
 
-  private params: any;
+  public params: any;
 
   constructor(private liaisonService: LiaisonService) {
   }
