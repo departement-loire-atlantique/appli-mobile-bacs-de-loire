@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { LiaisonService } from '../../shared/services/liaison.service';
 
@@ -10,13 +9,12 @@ import { LiaisonService } from '../../shared/services/liaison.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(private liaisonService: LiaisonService, private router: Router) { }
+  constructor(private liaisonService: LiaisonService) { }
 
   ngOnInit() { }
 
   openLiaison(id: string, direction: string) {
-    this.liaisonService.chooseLiaison(id, direction);
-    this.router.navigateByUrl('liaison/' + id);
+    this.liaisonService.openLiaison(id, direction);
   }
 
 }

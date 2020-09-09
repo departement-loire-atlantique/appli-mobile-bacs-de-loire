@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
@@ -12,17 +13,22 @@ export class LiaisonService {
 
   public readonly STORAGEKEY = 'choice';
 
-  public currentLiaison: any;
+  public currentLiaisonId: any;
   public currentDirection: string;
   public currentDirectionObserver = new Subject();
 
-  constructor(private storageService: StorageService) { }
+  constructor(private storageService: StorageService, private router: Router) { }
 
   chooseLiaison(id: string, direction?: string) {
-    this.currentLiaison = id;
+    this.currentLiaisonId = id;
     this.currentDirection = direction || 'north';
 
     this.storeCurrentChoice();
+  }
+
+  openLiaison(id: string, direction?: string) {
+    this.chooseLiaison(id, direction || 'south');
+    this.router.navigateByUrl('liaison/' + id);
   }
 
   /**
@@ -37,7 +43,7 @@ export class LiaisonService {
 
   async storeCurrentChoice() {
     await this.storageService.set(this.STORAGEKEY, {
-      liaison: this.currentLiaison,
+      liaison: this.currentLiaisonId,
       direction: this.currentDirection
     });
   }
@@ -45,12 +51,12 @@ export class LiaisonService {
   async setCurrentChoice() {
     const { liaison, direction } = await this.storageService.get(this.STORAGEKEY);
 
-    this.currentLiaison = liaison;
+    this.currentLiaisonId = liaison;
     this.currentDirection = direction;
   }
 
   getCurrentLiaison() {
-    return environment.liaisons.find(item => item.id === this.currentLiaison);
+    return environment.liaisons.find(item => item.id === this.currentLiaisonId);
   }
 
   getCurrentDirection() {
