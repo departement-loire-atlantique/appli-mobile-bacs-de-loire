@@ -1,0 +1,38 @@
+:host {
+  background: #fff;
+
+  ion-tab-bar {
+    --background: var(--ion-color-primary);
+    --border: none;
+    padding: 2rem 3rem 3rem 3rem;
+  }
+  ion-tab-button {
+    position: relative;
+
+    --color: var(--ion-color-primary-contrast);
+    --color-selected: var(--ion-color-primary-contrast);
+
+    &.tab-selected {
+      ion-icon {
+        transform: translateY(2px);
+      }
+      &::after {
+        height: 5px;
+        background: #000;
+      }
+    }
+
+    &::after {
+      content: "";
+      width: 100%;
+      position: absolute;
+      height: 2px;
+      background-color: #fff;
+      bottom: 0;
+      left: 0;
+
+      transition: all 0.25s ease-in-out;
+      backface-visibility: hidden;
+    }
+  }
+}
