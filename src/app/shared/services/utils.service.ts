@@ -17,11 +17,6 @@ export class UtilsService {
     return this.activatedRoute.snapshot.firstChild.paramMap.get('id');
   }
 
-  getTraficEventURL(from: string, to: string): string {
-    const url = environment.apiUrl + '/traficevents?filter=Bac%20de%20Loire%20' + encodeURI(`${from} - ${to}`);
-    return  url;
-  }
-
   getEventsList(apiEvents?: ApiEvent[]): Pertubation[]{
     // TODO : Remplacer EVENT_MOCK par apiEvents
     return EVENTS_BDL.map(event => {

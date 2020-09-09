@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   apiUrl: 'https://api.loire-atlantique.fr/opendata/1.0',
+  apiUrlHoraire: 'https://api.loire-atlantique.fr/bacspsn_android/1.0/traficparameter?id=bacs_horaires',
   firebaseConfig: {
     apiKey: 'AIzaSyB9cig_VWGYD9oGn5x6Gg-mY9kN6gORV-M',
     authDomain: 'hybride-bacs-de-loire.firebaseapp.com',
@@ -17,12 +18,14 @@ export const environment = {
       north: {
         name: 'Couëron',
         webcamIds: ['coueron1', 'coueron2'],
-        codeBus: 'CBAC'
+        codeBus: 'CBAC',
+        codeHoraire: 'liaison1'
       },
       south: {
         name: 'Le Pellerin',
         webcamIds: ['coueron1', 'coueron2'],
-        codeBus: 'LPBA'
+        codeBus: 'LPBA',
+        codeHoraire: 'liaison1'
       }
     },
     {
@@ -30,12 +33,14 @@ export const environment = {
       north: {
         name: 'Basse-Indre',
         webcamIds: ['indre1', 'indre2'],
-        codeBus: 'BIND'
+        codeBus: 'BIND',
+        codeHoraire: 'liaison2'
       },
       south: {
         name: 'Indret',
         webcamIds: ['indre1', 'indre2'],
-        codeBus: 'BIND'
+        codeBus: 'BIND',
+        codeHoraire: 'liaison2'
       }
     }
   ]

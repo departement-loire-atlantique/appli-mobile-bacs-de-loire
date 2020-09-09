@@ -16,7 +16,8 @@ export class ApiService {
 
   constructor() { }
 
-  async getEvent(urlEvent: string): Promise<ApiEvent[]> {
+  async getEvent(from: string, to: string): Promise<ApiEvent[]> {
+    const urlEvent = environment.apiUrl + '/traficevents?filter=Bac%20de%20Loire%20' + encodeURI(`${from} - ${to}`);
     const response = await Http.request({
       method: 'GET',
       url: urlEvent,

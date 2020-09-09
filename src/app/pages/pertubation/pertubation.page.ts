@@ -27,13 +27,12 @@ export class PertubationPage implements OnInit {
     this.liaisonService.currentDirectionObserver.subscribe(() => {
       const params = this.liaisonService.getCurrent();
       console.log('params ', params);
-      const urlEvent = this.utilService.getTraficEventURL(params.from, params.to);
-      this.getData(urlEvent);
+      this.getData(params.from, params.to);
     });
   }
 
-  async getData(urlEvent: string) {
-    this.eventsList = await this.apiService.getEvent(urlEvent);
+  async getData(from: string, to: string) {
+    this.eventsList = await this.apiService.getEvent(from, to);
     console.log('this.eventsList from API ', this.eventsList);
 
     this.eventsList = this.utilService.getEventsList();
