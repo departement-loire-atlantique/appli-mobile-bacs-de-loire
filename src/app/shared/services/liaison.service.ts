@@ -20,11 +20,6 @@ export class LiaisonService {
 
   constructor(private router: Router) { }
 
-  chooseLiaison(id: string, direction?: string) {
-    this.currentLiaisonId = id;
-    this.currentDirection = direction || 'south';
-  }
-
   openLiaison(id: string, direction?: string) {
     this.chooseLiaison(id, direction || 'south');
     this.router.navigateByUrl('liaison/' + id);
@@ -38,11 +33,16 @@ export class LiaisonService {
     this.currentDirectionObserver.next(this.currentDirection);
   }
 
-  getCurrentLiaison() {
+  private chooseLiaison(id: string, direction?: string) {
+    this.currentLiaisonId = id;
+    this.currentDirection = direction || 'south';
+  }
+
+  private getCurrentLiaison() {
     return environment.liaisons.find(item => item.id === this.currentLiaisonId);
   }
 
-  getCurrentDirection() {
+  private getCurrentDirection() {
     const currentLiaison = this.getCurrentLiaison();
     return currentLiaison[this.currentDirection === 'north' ? 'south' : 'north'];
   }
@@ -63,7 +63,7 @@ export class LiaisonService {
     return currentLiaison[this.currentDirection].name;
   }
 
-  getCurrentLiaisonData() {
+  getCurrent() {
     return {
       from: this.getStartPoint(),
       to: this.getEndPoint(),

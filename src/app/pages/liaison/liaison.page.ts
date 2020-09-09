@@ -19,7 +19,7 @@ export class LiaisonPage implements OnInit, OnDestroy {
   ngOnInit() {
     // Subscribe to direction change event
     this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      console.log(this.liaisonService.getCurrentLiaisonData());
+      console.log(this.liaisonService.getCurrent());
       this.startPoint = this.liaisonService.getStartPoint();
       this.endPoint = this.liaisonService.getEndPoint();
     });
