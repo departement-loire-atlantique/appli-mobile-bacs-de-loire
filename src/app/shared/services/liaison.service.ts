@@ -36,7 +36,7 @@ export class LiaisonService {
     this.currentDirection = direction || 'south';
   }
 
-  private getCurrentLiaison() {
+  getCurrentLiaison() {
     return environment.liaisons.find(item => item.id === this.currentLiaisonId);
   }
 
