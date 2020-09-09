@@ -26,8 +26,10 @@
       justify-content: center;
 
       &::before {
-        line-height: 1;
+        line-height: 0.8;
         font-size: 1em;
+        width: 1em;
+        height: 1em;
       }
     }
   }
