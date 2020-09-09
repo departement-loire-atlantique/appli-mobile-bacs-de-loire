@@ -1,26 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
 import { ApiService } from '../../shared/services/api.service';
 import { LiaisonService } from '../../shared/services/liaison.service';
+import { AbstractPage } from '../abstract';
 
 @Component({
   selector: 'app-camera',
   templateUrl: './camera.page.html',
   styleUrls: ['./camera.page.scss'],
 })
-export class CameraPage implements OnInit, OnDestroy {
+export class CameraPage extends AbstractPage implements OnInit {
 
   public firstWebcam: string;
   public secondWebcam: string;
   public date: Date;
   public currentLiaison: any;
-  public sub: Subscription;
 
-  constructor(private liaisonService: LiaisonService, private apiService: ApiService) { }
+  constructor(private liaisonService: LiaisonService, private apiService: ApiService) {
+    super();
+  }
 
   ngOnInit() {
-    this.sub = this.liaisonService.currentDirectionObserver.subscribe(() => {
+    this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
       this.getWebcams();
     });
   }
@@ -33,10 +34,6 @@ export class CameraPage implements OnInit, OnDestroy {
     this.secondWebcam = await this.apiService.getLatestWebcam(currentDirection.data.webcamIds[1]);
 
     this.date = new Date();
-  }
-
-  ngOnDestroy() {
-    this.sub.unsubscribe();
   }
 
 }
