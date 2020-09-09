@@ -3,6 +3,7 @@ import { FCM } from '@capacitor-community/fcm';
 import { Plugins, PushNotification, PushNotificationActionPerformed, PushNotificationToken } from '@capacitor/core';
 import { AlertController, ModalController, Platform } from '@ionic/angular';
 
+import { PushModalComponent } from '../components/push-modal/push-modal.component';
 import { CG44Notification } from '../models/notification';
 
 import { StorageService } from './storage.service';
@@ -16,6 +17,7 @@ const fcm = new FCM();
 export class NotificationsService {
 
   public readonly STORAGEKEY = 'is-subscribed';
+  public readonly STORAGEKEY_TOPICS = 'subscription-topics';
 
   constructor(
     private platform: Platform,
@@ -58,28 +60,53 @@ export class NotificationsService {
   /**
    * Subscribes to push notification in the "psn" topic
    */
-  subscribe() {
-    console.log('Subscribe to notifications');
+  async subscribe(topic: string) {
+    console.log('Subscribe to notifications: ' + topic);
     if (!this.platform.is('capacitor')) {
       return;
     }
 
-    fcm.subscribeTo({ topic: 'psn' }).then(() => {
-      this.storageService.set(this.STORAGEKEY, true);
-    });
+    await fcm.subscribeTo({ topic });
+    await this.setTopicSubscription(topic, true);
   }
 
   /**
    * Unsubscribes for the "psn" topic
    */
-  unsubscribe() {
-    console.log('Unsubscribe from notifications');
+  async unsubscribe(topic: string) {
+    console.log('Unsubscribe from notifications: ' + topic);
     if (!this.platform.is('capacitor')) {
       return;
     }
 
-    fcm.unsubscribeFrom({ topic: 'psn' }).then(() => {
-      this.storageService.set(this.STORAGEKEY, false);
+    await fcm.unsubscribeFrom({ topic });
+    await this.setTopicSubscription(topic, false);
+  }
+
+  async setTopicSubscription(topic: string, value: boolean) {
+    let currentValue = await this.storageService.get(this.STORAGEKEY_TOPICS);
+    let hasSubscriptions = false;
+
+    currentValue = currentValue || {};
+    currentValue[topic] = value;
+
+    console.log(currentValue);
+
+    for (const key in currentValue) {
+      if (currentValue[key]) {
+        hasSubscriptions = true;
+      }
+    }
+
+    await this.storageService.set(this.STORAGEKEY, hasSubscriptions);
+    await this.storageService.set(this.STORAGEKEY_TOPICS, currentValue);
+  }
+
+  async getSubscriptions() {
+    return await this.storageService.get(this.STORAGEKEY_TOPICS).then(value => {
+      console.log(value);
+
+      return value || {};
     });
   }
 
@@ -100,7 +127,15 @@ export class NotificationsService {
 
     // Subsribe to topic if registration succeeded
     PushNotifications.addListener('registration', (token: PushNotificationToken) => {
-      this.subscribe();
+      this.getSubscriptions().then(subs => {
+        for (const key in subs) {
+          if (Object.prototype.hasOwnProperty.call(subs, key)) {
+            if (subs[key]) {
+              this.subscribe(key);
+            }
+          }
+        }
+      });
     });
 
     PushNotifications.addListener('registrationError', (error: any) => {
@@ -124,12 +159,14 @@ export class NotificationsService {
    * @param notification notification received from firebase
    */
   async openNotificationModal(notification: CG44Notification) {
+    console.log(notification);
+
     const current = await this.modalController.getTop();
     if (current) {
       await current.dismiss();
     }
     const modal = await this.modalController.create({
-      component: null,
+      component: PushModalComponent,
       cssClass: 'notification-modal',
       componentProps: {
         notification

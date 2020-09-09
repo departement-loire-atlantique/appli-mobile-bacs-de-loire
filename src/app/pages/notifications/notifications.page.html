@@ -1,9 +1,29 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>notifications</ion-title>
-  </ion-toolbar>
+<ion-header class="ion-no-border">
+  <div class="ds44-flex-container ds44-flex-valign-center ds44-m1">
+    <div class="ds44-flex ds44-fg1 ds44-flex-valign-center">
+      <h1 class="ds44-fg1">Notifications</h1>
+      <app-back-button></app-back-button>
+    </div>
+  </div>
 </ion-header>
 
 <ion-content>
-
+  <ion-list lines="none">
+    <ion-item>
+      <ion-label (click)="subscribeToggleClp.checked = !subscribeToggleClp.checked" class="ion-text-wrap">
+        Je désire recevoir les notifications push pour la liaison Couëron - Le Pellerin
+      </ion-label>
+      <ion-toggle [disabled]="isLoading" #subscribeToggleClp [(ngModel)]="subscriptions.clp"
+        (ionChange)="changeSubscription('clp')">
+      </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label (click)="subscribeToggleBii.checked = !subscribeToggleBii.checked" class="ion-text-wrap">
+        Je désire recevoir les notifications push pour la liaison Basse-Indre - Indret
+      </ion-label>
+      <ion-toggle [disabled]="isLoading" #subscribeToggleBii [(ngModel)]="subscriptions.bii"
+        (ionChange)="changeSubscription('bii')">
+      </ion-toggle>
+    </ion-item>
+  </ion-list>
 </ion-content>
