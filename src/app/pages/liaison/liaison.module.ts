@@ -1,13 +1,10 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { LiaisonPageRoutingModule } from './liaison-routing.module';
-
-import { BackButtonComponent } from 'src/app/shared/components/back-button/back-button.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { LiaisonPage } from './liaison.page';
 
 
@@ -21,7 +18,6 @@ import { LiaisonPage } from './liaison.page';
   ],
   declarations: [
     LiaisonPage,
-    BackButtonComponent
   ]
 })
 export class LiaisonPageModule {}

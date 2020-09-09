@@ -18,6 +18,7 @@ export class LiaisonPage implements OnInit {
   ngOnInit() {
     this.storageService.get(KEYCHOICE).then(data => {
       this.liaison = data;
+      console.log('this.liaison ', this.liaison);
     });
   }
 

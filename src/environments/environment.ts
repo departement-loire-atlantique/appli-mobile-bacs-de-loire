@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.loire-atlantique.fr/opendata/1.0',
+  apiUrlEvent: 'https://api.loire-atlantique.fr/opendata/1.0/traficevents?filter=Bac%20de%20Loire%20',
+  apiUrlHoraire: 'https://api.loire-atlantique.fr/bacspsn_android/1.0/traficparameter?id=bacs_horaires',
   firebaseConfig: {}
 };
 
