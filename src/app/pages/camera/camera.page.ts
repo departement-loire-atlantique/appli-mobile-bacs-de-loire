@@ -24,6 +24,9 @@ export class CameraPage extends AbstractPage implements OnInit {
     this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
       this.getWebcams();
     });
+    this.enterEvent.subscribe(() => {
+      this.getWebcams();
+    });
   }
 
   async getWebcams() {

@@ -27,14 +27,17 @@ export class PertubationPage extends AbstractPage implements OnInit {
 
   ngOnInit() {
     this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      const params = this.liaisonService.getCurrent();
-      console.log('params ', params);
-      this.getData(params.from, params.to);
+      this.getData();
+    });
+
+    this.enterEvent.subscribe(() => {
+      this.getData();
     });
   }
 
-  async getData(from: string, to: string) {
-    this.eventsList = await this.apiService.getEvent(from, to);
+  async getData() {
+    const params = this.liaisonService.getCurrent();
+    this.eventsList = await this.apiService.getEvent(params.from, params.to);
     console.log('this.eventsList from API ', this.eventsList);
 
     this.eventsList = this.utilService.getEventsList();

@@ -24,14 +24,18 @@ export class HorairePage extends AbstractPage implements OnInit {
 
   ngOnInit() {
     this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      const params = this.liaisonService.getCurrent();
-      this.getDataHoraire(params.data.codeHoraire, params.from);
+      this.getDataHoraire();
+    });
+
+    this.enterEvent.subscribe(() => {
+      this.getDataHoraire();
     });
   }
 
-  async getDataHoraire(typeLiaison: string, from: string) {
-    const horaire = await this.apiService.getHoraireBacs(typeLiaison);
-    this.currentHoraire = this.utilService.getCurrentHoraire(from, horaire);
+  async getDataHoraire() {
+    const params = this.liaisonService.getCurrent();
+    const horaire = await this.apiService.getHoraireBacs(params.data.codeHoraire);
+    this.currentHoraire = this.utilService.getCurrentHoraire(params.from, horaire);
   }
 
 }
