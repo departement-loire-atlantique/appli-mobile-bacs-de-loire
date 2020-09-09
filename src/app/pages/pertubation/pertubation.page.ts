@@ -15,10 +15,8 @@ export class PertubationPage implements OnInit {
   }
 
   ngOnInit() {
-    this.params = this.liaisonService.getCurrentDirection();
-
     this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.params = this.liaisonService.getCurrentDirection();
+      this.params = this.liaisonService.getCurrent();
     });
   }
 
