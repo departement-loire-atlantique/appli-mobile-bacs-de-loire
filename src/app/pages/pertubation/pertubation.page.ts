@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { KEYCHOICE } from 'src/app/shared/models/constantesCD44';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Pertubation } from 'src/app/shared/models/event';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { StorageService } from 'src/app/shared/services/storage.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
 import { LiaisonService } from '../../shared/services/liaison.service';
@@ -12,19 +11,22 @@ import { LiaisonService } from '../../shared/services/liaison.service';
   templateUrl: './pertubation.page.html',
   styleUrls: ['./pertubation.page.scss'],
 })
-export class PertubationPage implements OnInit {
+export class PertubationPage implements OnInit, OnDestroy {
 
   currentEvents: Pertubation[];
   upcomingEvents: Pertubation[];
   eventsList: Pertubation[];
 
-  constructor(private utilService: UtilsService,
-              private apiService: ApiService,
-              private liaisonService: LiaisonService
-    ) { }
+  private sub: Subscription;
+
+  constructor(
+    private utilService: UtilsService,
+    private apiService: ApiService,
+    private liaisonService: LiaisonService
+  ) { }
 
   ngOnInit() {
-    this.liaisonService.currentDirectionObserver.subscribe(() => {
+    this.sub = this.liaisonService.currentDirectionObserver.subscribe(() => {
       const params = this.liaisonService.getCurrent();
       console.log('params ', params);
       this.getData(params.from, params.to);
@@ -41,5 +43,8 @@ export class PertubationPage implements OnInit {
     this.upcomingEvents = this.eventsList.filter(el => el.status === 'prévisionnel');
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
 }
