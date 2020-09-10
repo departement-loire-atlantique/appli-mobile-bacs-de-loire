@@ -22,6 +22,8 @@ export class HomePage implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
+    // this.hideEvent(); To PROD
+    // this.showEvents(); To PROD
     this.showEvent('#perturbation-bi-i', 'clp', 'south');
     this.showEvent('#perturbation-c-lp', 'bii', 'south');
   }

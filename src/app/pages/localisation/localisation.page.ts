@@ -2,6 +2,7 @@ import { Component, Injector } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
 import { AbstractPage } from '../abstract';
+import { LiaisonService } from 'src/app/shared/services/liaison.service';
 
 @Component({
   selector: 'app-localisation',
@@ -17,8 +18,8 @@ export class LocalisationPage extends AbstractPage {
     placeQuery?: string
   } = {};
 
-  constructor(injector: Injector, private platform: Platform) {
-    super(injector);
+  constructor(injector: Injector, private platform: Platform, private liaisonService: LiaisonService) {
+    super();
   }
 
   ionViewWillEnter() {

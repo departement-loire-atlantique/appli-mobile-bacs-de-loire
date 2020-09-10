@@ -2,6 +2,7 @@ export const environment = {
   production: true,
   apiUrl: 'https://api.loire-atlantique.fr/opendata/1.0',
   apiUrlHoraire: 'https://api.loire-atlantique.fr/bacspsn_android/1.0/traficparameter?id=bacs_horaires',
+  apiUrlBus: 'http://open.tan.fr/ewp/tempsattente.json/',
   firebaseConfig: {
     apiKey: 'AIzaSyB9cig_VWGYD9oGn5x6Gg-mY9kN6gORV-M',
     authDomain: 'hybride-bacs-de-loire.firebaseapp.com',

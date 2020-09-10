@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { EVENTS_BDL } from '../models/constantesCD44';
 import { ApiEvent, Pertubation } from '../models/event';
-import { CurrentHoraire, Horaire } from '../models/horaire';
+import { CurrentHoraire, Horaire, Bus, DisplayBus } from '../models/horaire';
 
 const { Network } = Plugins;
 
@@ -73,5 +73,18 @@ export class UtilsService {
     currentHoraire.period = horaire.from_period.charAt(0).toUpperCase() + horaire.from_period.slice(1);
     currentHoraire.message = horaire.from_message;
     return currentHoraire;
+  }
+
+  formatBus(apiBus: Bus[]): DisplayBus[]{
+    return apiBus.reduce( (acc, curr) => {
+    console.log('acc ', acc, 'curr ', curr);
+    const itemExists = acc.find( item => curr.ligne.numLigne === item.numeroBus && curr.sens === item.sens);
+    if (itemExists) {
+      itemExists.tempsList = [...itemExists.tempsList, curr.temps];
+    } else {
+      acc.push({numeroBus: curr.ligne.numLigne, sens: curr.sens, terminus: curr.terminus, tempsList: [curr.temps]});
+    }
+    return acc;
+  }, []);
   }
 }
