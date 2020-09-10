@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ApiService } from '../../shared/services/api.service';
 import { LiaisonService } from '../../shared/services/liaison.service';
@@ -9,7 +9,7 @@ import { AbstractPage } from '../abstract';
   templateUrl: './camera.page.html',
   styleUrls: ['./camera.page.scss'],
 })
-export class CameraPage extends AbstractPage implements OnInit {
+export class CameraPage extends AbstractPage {
 
   public firstWebcam: string;
   public secondWebcam: string;
@@ -20,11 +20,8 @@ export class CameraPage extends AbstractPage implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.getWebcams();
-    });
-    this.enterEvent.subscribe(() => {
       this.getWebcams();
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Pertubation } from 'src/app/shared/models/event';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -11,7 +11,7 @@ import { AbstractPage } from '../abstract';
   templateUrl: './pertubation.page.html',
   styleUrls: ['./pertubation.page.scss'],
 })
-export class PertubationPage extends AbstractPage implements OnInit {
+export class PertubationPage extends AbstractPage {
 
   public currentEvents: Pertubation[];
   public upcomingEvents: Pertubation[];
@@ -25,12 +25,8 @@ export class PertubationPage extends AbstractPage implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.getData();
-    });
-
-    this.enterEvent.subscribe(() => {
       this.getData();
     });
   }

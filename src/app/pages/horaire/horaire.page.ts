@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CurrentHoraire, Horaire } from 'src/app/shared/models/horaire';
+import { Component } from '@angular/core';
+import { CurrentHoraire } from 'src/app/shared/models/horaire';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { LiaisonService } from 'src/app/shared/services/liaison.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -11,7 +11,7 @@ import { AbstractPage } from '../abstract';
   templateUrl: './horaire.page.html',
   styleUrls: ['./horaire.page.scss'],
 })
-export class HorairePage extends AbstractPage implements OnInit {
+export class HorairePage extends AbstractPage {
 
   public currentHoraire: CurrentHoraire;
 
@@ -22,12 +22,8 @@ export class HorairePage extends AbstractPage implements OnInit {
     super();
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.getDataHoraire();
-    });
-
-    this.enterEvent.subscribe(() => {
       this.getDataHoraire();
     });
   }
