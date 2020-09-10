@@ -19,6 +19,5 @@ export class AbstractPage implements OnDestroy {
       this.subscription.unsubscribe();
     }
     this.enterEvent.unsubscribe();
-    this.enterEvent.complete();
   }
 }
