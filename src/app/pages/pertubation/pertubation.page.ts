@@ -33,10 +33,8 @@ export class PertubationPage extends AbstractPage {
   async getData() {
     const params = this.liaisonService.getCurrent();
     this.eventsList = await this.apiService.getEvent(params.from, params.to);
-    console.log('this.eventsList from API ', this.eventsList);
 
     this.eventsList = this.utilService.getEventsList();
-    console.log('this.eventsList ', this.eventsList);
     this.currentEvents = this.eventsList.filter(el => el.status === 'en cours');
     this.upcomingEvents = this.eventsList.filter(el => el.status === 'prévisionnel');
   }

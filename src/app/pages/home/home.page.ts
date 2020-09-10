@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { langFr } from 'src/app/shared/models/constantesCD44';
 import { ApiService } from 'src/app/shared/services/api.service';
@@ -10,27 +10,21 @@ import { LiaisonService } from '../../shared/services/liaison.service';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit, AfterViewInit {
+export class HomePage implements AfterViewInit {
 
   @ViewChild('svg') svg: ElementRef;
   private displayedElements: HTMLElement[] = [];
 
-  constructor(private liaisonService: LiaisonService,
-              private menuController: MenuController,
-              private apiService: ApiService) { }
+  constructor(
+    private liaisonService: LiaisonService,
+    private menuController: MenuController,
+    private apiService: ApiService
+  ) { }
 
   ngAfterViewInit(): void {
     this.showEvent('#perturbation-bi-i', 'clp', 'south');
     this.showEvent('#perturbation-c-lp', 'bii', 'south');
-    //this.hideEvent();
-    //this.showEvents();
   }
-
-  ngOnInit() {
-    console.log('HOME');
-  }
-
-
 
   openLiaison(id: string, direction: string) {
     this.liaisonService.openLiaison(id, direction);
@@ -51,16 +45,13 @@ export class HomePage implements OnInit, AfterViewInit {
     }
   }
 
-  showEvent(zoneEvent: string, id: string, liaison: string) {
+  showEvent(selector: string, id: string, liaison: string) {
     if (!this.svg) {
       return;
     }
     const clickLiaison = () => this.openLiaison(id, liaison);
-    const zone = this.svg.nativeElement.querySelector(zoneEvent);
-    console.log('Zone ', zone);
-    console.log('zone.nodeChild[1] ', zone.childNodes);
+    const zone = this.svg.nativeElement.querySelector(selector);
     zone.classList.add('pertubation-visible');
-    //zone.onclick = clickLiaison;
     zone.childNodes[2].onclick = clickLiaison;
     this.displayedElements.push(zone);
   }
