@@ -7,9 +7,9 @@
     </p>
 
     <h4 class="h4-app-bacs">{{ currentLiaison.north.name }}</h4>
-    <img src="{{ firstWebcam }}" alt="image de webcam">
+    <img *ngIf="firstWebcam" src="{{ firstWebcam }}" alt="image de webcam">
 
     <h4 class="h4-app-bacs">{{ currentLiaison.south.name }}</h4>
-    <img src="{{ secondWebcam }}" alt="image de webcam">
+    <img *ngIf="secondWebcam" src="{{ secondWebcam }}" alt="image de webcam">
   </div>
 </ion-content>

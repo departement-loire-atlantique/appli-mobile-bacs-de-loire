@@ -1,9 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>localisation</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="ds44--l-padding">
+    <h3 class="h3-like">Localisation</h3>
 
+    <p class="ds44-mt2 ds44-smallText">
+      <i class="icon icon-marker ds44-valignTop" aria-hidden="true"></i>
+      <span>
+        {{ address }}
+      </span>
+    </p>
+    <button (click)="openMap()" class="ds44-mt2 ds44-smallText ds44-noPdg">
+      <i class="icon icon-directions ds44-valignTop" aria-hidden="true"></i> S’y rendre
+    </button>
+  </div>
 </ion-content>

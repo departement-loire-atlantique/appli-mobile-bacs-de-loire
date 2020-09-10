@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { Pertubation } from 'src/app/shared/models/event';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
-import { LiaisonService } from '../../shared/services/liaison.service';
 import { AbstractPage } from '../abstract';
 
 @Component({
@@ -20,9 +19,9 @@ export class PertubationPage extends AbstractPage {
   constructor(
     private utilService: UtilsService,
     private apiService: ApiService,
-    private liaisonService: LiaisonService
+    injector: Injector
   ) {
-    super();
+    super(injector);
   }
 
   ionViewWillEnter() {
