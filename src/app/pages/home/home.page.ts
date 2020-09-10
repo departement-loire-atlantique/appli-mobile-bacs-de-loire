@@ -27,7 +27,6 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log('HOME');
   }
 
 
@@ -57,8 +56,6 @@ export class HomePage implements OnInit, AfterViewInit {
     }
     const clickLiaison = () => this.openLiaison(id, liaison);
     const zone = this.svg.nativeElement.querySelector(zoneEvent);
-    console.log('Zone ', zone);
-    console.log('zone.nodeChild[1] ', zone.childNodes);
     zone.classList.add('pertubation-visible');
     //zone.onclick = clickLiaison;
     zone.childNodes[2].onclick = clickLiaison;

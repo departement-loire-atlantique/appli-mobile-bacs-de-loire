@@ -5,6 +5,7 @@ import { FilesystemDirectory, Plugins } from '@capacitor/core';
 import { environment } from 'src/environments/environment';
 
 import { ApiEvent } from '../models/event';
+import { Bus } from '../models/horaire';
 
 
 const { Http, Filesystem } = Plugins;
@@ -21,6 +22,17 @@ export class ApiService {
     const response = await Http.request({
       method: 'GET',
       url: urlEvent,
+      params: {
+        mode: 'no-cors'
+      }
+    });
+    return response.data;
+  }
+
+  async getHoraireBus(codeBus: string): Promise<Bus[]> {
+    const response = await Http.request({
+      method: 'GET',
+      url: environment.apiUrlBus + codeBus,
       params: {
         mode: 'no-cors'
       }

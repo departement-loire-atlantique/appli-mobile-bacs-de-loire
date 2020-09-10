@@ -1,9 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>bus</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div class="ds44--l-padding">
+    <h3 class="h3-like">Bus</h3>
+    <section *ngIf="displayBus && !displayBus?.length" class="ds44-app-tuile ds44-flex-align-center">
+      FIN DE SERVICE
+    </section>
+    <div *ngIf="displayBus && displayBus.length" >
+      <div *ngFor="let bus of displayBus">
+        <section class="ds44-app-tuile" >
+          <div class="ds44-flex-container ds44-flex-valign-center ds44-mb2 ds44-lightBG">
+            <div
+              class="ds44-card__dateContainer ds44-flex-container ds44-flex-align-center" aria-hidden="true">
+              <p><span class="ds44-cardDateNumber">{{ bus.numeroBus }}</span></p>
+            </div>
+    
+            <div class="ds44--m-padding ds44-fg1 ds44-center">
+              <p>{{ infosLiaison.from === 'Indret'? 'Basse-Indre' : infosLiaison.from }}</p>
+              <p><i class="icon icon-arrow-down" aria-hidden="true"></i></p>
+              <p>{{ bus.terminus }}</p>
+            </div>
+          </div>
+        </section>
+    
+        <h3 class="h3-like">Prochains départs</h3>
+        <div *ngFor="let temps of bus.tempsList; let isFirst = 'first'">
+          <section class="ds44-app-tuile ds44-app-tuile__bacs">
+            <div class="ds44-mb2 " [ngClass]="isFirst?'ds44-theme':'ds44-lightBG'">
+              <div class="ds44-bacs-horaires-container">
+                <p class="ds44-bacs-horaire ds44-center">{{ temps }}</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
