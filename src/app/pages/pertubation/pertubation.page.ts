@@ -31,12 +31,21 @@ export class PertubationPage extends AbstractPage {
   }
 
   async getData() {
+    this.startRequest();
+
     const params = this.liaisonService.getCurrent();
-    this.eventsList = await this.apiService.getEvent(params.from, params.to);
+
+    try {
+      this.eventsList = await this.apiService.getEvent(params.from, params.to);
+    } catch (error) {
+      this.handleError();
+    }
 
     this.eventsList = this.utilService.getEventsList();
     this.currentEvents = this.eventsList.filter(el => el.status === 'en cours');
     this.upcomingEvents = this.eventsList.filter(el => el.status === 'prévisionnel');
+
+    this.endRequest();
   }
 
 }

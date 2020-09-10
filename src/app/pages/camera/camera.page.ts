@@ -26,13 +26,26 @@ export class CameraPage extends AbstractPage {
   }
 
   async getWebcams() {
+    this.startRequest();
+
     this.currentLiaison = this.liaisonService.getCurrentLiaison();
     const currentDirection = this.liaisonService.getCurrent();
 
-    this.firstWebcam = await this.apiService.getLatestWebcam(currentDirection.data.webcamIds[0]);
-    this.secondWebcam = await this.apiService.getLatestWebcam(currentDirection.data.webcamIds[1]);
+    try {
+      this.firstWebcam = await this.apiService.getLatestWebcam(currentDirection.data.webcamIds[0]);
+    } catch (error) {
+      this.handleError();
+    }
+
+    try {
+      this.secondWebcam = await this.apiService.getLatestWebcam(currentDirection.data.webcamIds[1]);
+    } catch (error) {
+      this.handleError();
+    }
 
     this.date = new Date();
+
+    this.endRequest();
   }
 
 }

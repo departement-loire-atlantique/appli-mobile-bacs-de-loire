@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { BackButtonComponent } from './components/back-button/back-button.component';
 import { PertubationsComponent } from './components/pertubations/pertubations.component';
 import { PushModalComponent } from './components/push-modal/push-modal.component';
+import { RequestFeedbackComponent } from './components/request-feedback/request-feedback.component';
 
 
 
@@ -12,7 +13,8 @@ import { PushModalComponent } from './components/push-modal/push-modal.component
   declarations: [
     BackButtonComponent,
     PertubationsComponent,
-    PushModalComponent
+    PushModalComponent,
+    RequestFeedbackComponent
   ],
   providers: [],
   entryComponents: [
@@ -25,7 +27,8 @@ import { PushModalComponent } from './components/push-modal/push-modal.component
   exports: [
     BackButtonComponent,
     PushModalComponent,
-    PertubationsComponent
+    PertubationsComponent,
+    RequestFeedbackComponent
   ]
 })
 export class SharedModule { }

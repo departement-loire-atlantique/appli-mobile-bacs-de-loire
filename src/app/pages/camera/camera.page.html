@@ -1,15 +1,17 @@
 <ion-content>
-  <div class="ds44--l-padding" *ngIf="currentLiaison">
-    <h3 class="h3-like">Webcams</h3>
-    <p class="ds44-mt2 ds44-smallText">
-      <i class="icon icon-date ds44-valignTop" aria-hidden="true"></i> {{ date | date:'dd/MM/yy' }}
-      <i class="icon icon-time ds44-valignTop ds44--xl-padding-l" aria-hidden="true"></i> {{ date | date:'HH:mm' }}
-    </p>
+  <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getWebcams()">
+    <div class="ds44--l-padding" *ngIf="currentLiaison">
+      <h3 class="h3-like">Webcams</h3>
+      <p class="ds44-mt2 ds44-smallText">
+        <i class="icon icon-date ds44-valignTop" aria-hidden="true"></i> {{ date | date:'dd/MM/yy' }}
+        <i class="icon icon-time ds44-valignTop ds44--xl-padding-l" aria-hidden="true"></i> {{ date | date:'HH:mm' }}
+      </p>
 
-    <h4 class="h4-app-bacs">{{ currentLiaison.north.name }}</h4>
-    <img *ngIf="firstWebcam" src="{{ firstWebcam }}" alt="image de webcam">
+      <h4 class="h4-app-bacs">{{ currentLiaison.north.name }}</h4>
+      <img *ngIf="firstWebcam" src="{{ firstWebcam }}" alt="image de webcam">
 
-    <h4 class="h4-app-bacs">{{ currentLiaison.south.name }}</h4>
-    <img *ngIf="secondWebcam" src="{{ secondWebcam }}" alt="image de webcam">
-  </div>
+      <h4 class="h4-app-bacs">{{ currentLiaison.south.name }}</h4>
+      <img *ngIf="secondWebcam" src="{{ secondWebcam }}" alt="image de webcam">
+    </div>
+  </app-request-feedback>
 </ion-content>
