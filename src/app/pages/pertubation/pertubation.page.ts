@@ -21,7 +21,6 @@ export class PertubationPage extends AbstractPage {
     private utilService: UtilsService,
     private apiService: ApiService,
     private liaisonService: LiaisonService,
-    injector: Injector
   ) {
     super();
   }

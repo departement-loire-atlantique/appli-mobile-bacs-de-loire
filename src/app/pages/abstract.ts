@@ -6,10 +6,8 @@ import { LiaisonService } from '../shared/services/liaison.service';
 @Component({ template: '' })
 export class AbstractPage implements OnDestroy {
   public subscription: Subscription;
-  public liaisonService: LiaisonService;
 
-  constructor(injector: Injector) {
-    this.liaisonService = injector.get(LiaisonService);
+  constructor() {
   }
 
   ionViewDidLeave() {
