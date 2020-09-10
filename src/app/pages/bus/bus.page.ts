@@ -1,7 +1,6 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { Bus, DisplayBus } from 'src/app/shared/models/horaire';
+import { Component, Injector } from '@angular/core';
+import { DisplayBus } from 'src/app/shared/models/horaire';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { LiaisonService } from 'src/app/shared/services/liaison.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
 import { AbstractPage } from '../abstract';
@@ -13,7 +12,7 @@ const items: any[] = [{ sens: 1, terminus: 'Mendès France - Bellevue', infotraf
   templateUrl: './bus.page.html',
   styleUrls: ['./bus.page.scss'],
 })
-export class BusPage extends AbstractPage implements OnInit {
+export class BusPage extends AbstractPage {
 
   infosLiaison: any;
   displayBus: DisplayBus[];
@@ -26,7 +25,7 @@ export class BusPage extends AbstractPage implements OnInit {
     super(injector);
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.liaisonService.currentDirectionObserver.subscribe(() => {
       this.getDataBus();
       // this.infosLiaison = this.liaisonService.getCurrent();
