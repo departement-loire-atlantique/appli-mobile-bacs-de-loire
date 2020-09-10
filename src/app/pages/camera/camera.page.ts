@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 
 import { ApiService } from '../../shared/services/api.service';
-import { LiaisonService } from '../../shared/services/liaison.service';
 import { AbstractPage } from '../abstract';
 
 @Component({
@@ -16,8 +15,8 @@ export class CameraPage extends AbstractPage {
   public date: Date;
   public currentLiaison: any;
 
-  constructor(private liaisonService: LiaisonService, private apiService: ApiService) {
-    super();
+  constructor(injector: Injector, private apiService: ApiService) {
+    super(injector);
   }
 
   ionViewWillEnter() {
