@@ -1,23 +1,26 @@
-import { EventEmitter, OnDestroy } from '@angular/core';
+import { Component, Injector, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { LiaisonService } from '../shared/services/liaison.service';
+
+@Component({ template: '' })
 export class AbstractPage implements OnDestroy {
   public subscription: Subscription;
+  public liaisonService: LiaisonService;
 
-  public enterEvent: EventEmitter<any> = new EventEmitter();
-  public firstDisplay = true;
+  constructor(injector: Injector) {
+    this.liaisonService = injector.get(LiaisonService);
+  }
 
-  ionViewWillEnter() {
-    if (!this.firstDisplay) {
-      this.enterEvent.emit();
+  ionViewDidLeave() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
-    this.firstDisplay = false;
   }
 
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.enterEvent.unsubscribe();
   }
 }

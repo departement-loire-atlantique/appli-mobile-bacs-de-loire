@@ -48,6 +48,7 @@ export class ApiService {
         mode: 'no-cors'
       }
     });
+
     return response.data.bacs_horaires[typeLiaison];
   }
 

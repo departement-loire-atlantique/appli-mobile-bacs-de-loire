@@ -61,8 +61,8 @@ export class NotificationsService {
    * Subscribes to push notification in the "psn" topic
    */
   async subscribe(topic: string) {
-    console.log('Subscribe to notifications: ' + topic);
     if (!this.platform.is('capacitor')) {
+      console.log('Subscribe to notifications: ' + topic);
       return;
     }
 
@@ -74,8 +74,8 @@ export class NotificationsService {
    * Unsubscribes for the "psn" topic
    */
   async unsubscribe(topic: string) {
-    console.log('Unsubscribe from notifications: ' + topic);
     if (!this.platform.is('capacitor')) {
+      console.log('Unsubscribe from notifications: ' + topic);
       return;
     }
 
@@ -90,8 +90,6 @@ export class NotificationsService {
     currentValue = currentValue || {};
     currentValue[topic] = value;
 
-    console.log(currentValue);
-
     for (const key in currentValue) {
       if (currentValue[key]) {
         hasSubscriptions = true;
@@ -104,8 +102,6 @@ export class NotificationsService {
 
   async getSubscriptions() {
     return await this.storageService.get(this.STORAGEKEY_TOPICS).then(value => {
-      console.log(value);
-
       return value || {};
     });
   }
@@ -159,8 +155,6 @@ export class NotificationsService {
    * @param notification notification received from firebase
    */
   async openNotificationModal(notification: CG44Notification) {
-    console.log(notification);
-
     const current = await this.modalController.getTop();
     if (current) {
       await current.dismiss();

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CurrentHoraire, Horaire } from 'src/app/shared/models/horaire';
+import { Component, Injector } from '@angular/core';
+import { CurrentHoraire } from 'src/app/shared/models/horaire';
 import { ApiService } from 'src/app/shared/services/api.service';
-import { LiaisonService } from 'src/app/shared/services/liaison.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
 import { AbstractPage } from '../abstract';
@@ -11,30 +10,27 @@ import { AbstractPage } from '../abstract';
   templateUrl: './horaire.page.html',
   styleUrls: ['./horaire.page.scss'],
 })
-export class HorairePage extends AbstractPage implements OnInit {
+export class HorairePage extends AbstractPage {
 
   public currentHoraire: CurrentHoraire;
 
   constructor(
-    private liaisonService: LiaisonService,
     private apiService: ApiService,
-    private utilService: UtilsService) {
-    super();
+    private utilService: UtilsService,
+    injector: Injector
+  ) {
+    super(injector);
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.getDataHoraire();
-    });
-
-    this.enterEvent.subscribe(() => {
       this.getDataHoraire();
     });
   }
 
   async getDataHoraire() {
     const params = this.liaisonService.getCurrent();
-    const horaire = await this.apiService.getHoraireBacs(params.data.codeHoraire);
+    const horaire = await this.apiService.getHoraireBacs(params.codeHoraire);
     this.currentHoraire = this.utilService.getCurrentHoraire(params.from, horaire);
   }
 

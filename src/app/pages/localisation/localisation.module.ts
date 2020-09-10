@@ -1,11 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
 import { LocalisationPageRoutingModule } from './localisation-routing.module';
-
 import { LocalisationPage } from './localisation.page';
 
 @NgModule({
@@ -17,4 +15,4 @@ import { LocalisationPage } from './localisation.page';
   ],
   declarations: [LocalisationPage]
 })
-export class LocalisationPageModule {}
+export class LocalisationPageModule { }

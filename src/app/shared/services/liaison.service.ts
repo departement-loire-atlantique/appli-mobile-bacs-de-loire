@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
+import { Direction, Liaison } from '../models/liaison';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class LiaisonService {
     this.currentDirection = direction || 'south';
   }
 
-  getCurrentLiaison() {
+  getCurrentLiaison(): Liaison {
     return environment.liaisons.find(item => item.id === this.currentLiaisonId);
   }
 
@@ -56,7 +57,7 @@ export class LiaisonService {
    * Returns the name of the start point according to the direction
    * start point = !direction (south when going north and vice versa)
    */
-  getStartPoint() {
+  getStartPoint(): string {
     const currentLiaison = this.getCurrentLiaison();
     return currentLiaison[this.getDirectionName()].name;
   }
@@ -65,16 +66,19 @@ export class LiaisonService {
    * Returns the name of the end point according to the direction
    * end point = direction (north when going north)
    */
-  getEndPoint() {
+  getEndPoint(): string {
     const currentLiaison = this.getCurrentLiaison();
     return currentLiaison[this.currentDirection].name;
   }
 
-  getCurrent() {
-    return {
+  getCurrent(): Direction {
+    const currentLiaison = this.getCurrentLiaison();
+    const current: Direction = {
       from: this.getStartPoint(),
       to: this.getEndPoint(),
+      codeHoraire: currentLiaison.codeHoraire,
       data: this.getCurrentDirectionData()
     };
+    return current;
   }
 }

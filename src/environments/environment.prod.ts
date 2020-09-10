@@ -16,32 +16,54 @@ export const environment = {
   liaisons: [
     {
       id: 'clp',
+      codeHoraire: 'liaison1',
       north: {
         name: 'Couëron',
         webcamIds: ['coueron1', 'coueron2'],
         codeBus: 'CBAC',
-        codeHoraire: 'liaison1'
+        location: {
+          lat: '47.205729',
+          lng: '-1.751960',
+          placeQuery: 'Quai+du+bac+Couëron',
+        },
+        address: 'Quai du bac Couëron\n44640 Le Pellerin',
       },
       south: {
         name: 'Le Pellerin',
         webcamIds: ['coueron1', 'coueron2'],
         codeBus: 'LPBA',
-        codeHoraire: 'liaison1'
+        location: {
+          lat: '47.203055',
+          lng: '-1.755171',
+          placeQuery: 'Quai+du+bac+Le+Pellerin'
+        },
+        address: 'Quai du bac Le Pellerin\n44640 Le Pellerin',
       }
     },
     {
       id: 'bii',
+      codeHoraire: 'liaison2',
       north: {
         name: 'Basse-Indre',
         webcamIds: ['indre1', 'indre2'],
         codeBus: 'BIND',
-        codeHoraire: 'liaison2'
+        location: {
+          lat: '47.1961689',
+          lng: '-1.6777476',
+          placeQuery: 'Bac+de+Loire+:+Basse+Indre+>+Indret'
+        },
+        address: '24 Quai Victor Boquien\n 44610 Indre'
       },
       south: {
         name: 'Indret',
         webcamIds: ['indre1', 'indre2'],
         codeBus: 'BIND',
-        codeHoraire: 'liaison2'
+        location: {
+          lat: '47.1951236',
+          lng: '-1.6805797',
+          placeQuery: 'Quai+du+bac+Indret',
+        },
+        address: 'Quai du bac Indret, 44610 Indre'
       }
     }
   ]
