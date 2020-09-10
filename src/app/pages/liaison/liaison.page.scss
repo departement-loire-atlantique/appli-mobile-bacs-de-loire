@@ -5,7 +5,30 @@
     --background: var(--ion-color-primary);
     --border: none;
     padding: 2rem 3rem 3rem 3rem;
+
+    .icon {
+      width: 1em;
+      height: 1em;
+      line-height: 1;
+      text-align: center;
+
+      &::before {
+        display: inline-block;
+        font-size: 1em;
+        width: 1em;
+        height: 1em;
+        line-height: 1;
+        text-align: center;
+
+        transform: translateY(-10%);
+      }
+    }
+
+    i.icon {
+      font-size: 30px;
+    }
   }
+
   ion-tab-button {
     position: relative;
 
