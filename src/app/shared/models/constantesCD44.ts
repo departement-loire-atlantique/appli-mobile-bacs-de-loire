@@ -1,5 +1,11 @@
 
 export const KEYCHOICE = 'choix_quai';
+export const langFr = {
+  COUERON: 'Coueron',
+  BASSEINDRE: 'Basse-Indre',
+  LEPELLERIN: 'Le Pellerin',
+  INDRET: 'Indret'
+}
 
 export const EVENTS_BDL = [
     {
