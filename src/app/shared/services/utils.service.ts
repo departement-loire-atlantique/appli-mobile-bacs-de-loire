@@ -1,17 +1,30 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { Plugins } from '@capacitor/core';
+import { Observable } from 'rxjs';
 
 import { EVENTS_BDL } from '../models/constantesCD44';
 import { ApiEvent, Pertubation } from '../models/event';
-import { CurrentHoraire, Horaire, Bus, DisplayBus } from '../models/horaire';
+import { Bus, CurrentHoraire, DisplayBus, Horaire } from '../models/horaire';
+
+const { Network } = Plugins;
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor() { }
+
+  /**
+   * Hook to the networkStatusChange event
+   */
+  networkChangeDetector() {
+    return new Observable(observer => {
+      Network.addListener('networkStatusChange', status => {
+        observer.next(status);
+      });
+    });
+  }
 
   getEventsList(apiEvents?: ApiEvent[]): Pertubation[] {
     // TODO : Remplacer EVENT_MOCK par apiEvents

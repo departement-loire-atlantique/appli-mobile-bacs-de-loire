@@ -18,9 +18,9 @@ export class HorairePage extends AbstractPage {
   constructor(
     private apiService: ApiService,
     private utilService: UtilsService,
-    private liaisonService: LiaisonService
+    injector: Injector
   ) {
-    super();
+    super(injector);
   }
 
   ionViewWillEnter() {
@@ -30,9 +30,20 @@ export class HorairePage extends AbstractPage {
   }
 
   async getDataHoraire() {
+    this.startRequest();
+
     const params = this.liaisonService.getCurrent();
-    const horaire = await this.apiService.getHoraireBacs(params.codeHoraire);
-    this.currentHoraire = this.utilService.getCurrentHoraire(params.from, horaire);
+    let schedule: any;
+
+    try {
+      schedule = await this.apiService.getHoraireBacs(params.codeHoraire);
+    } catch (error) {
+      this.handleError();
+    }
+
+    this.currentHoraire = this.utilService.getCurrentHoraire(params.from, schedule);
+
+    this.endRequest();
   }
 
 }

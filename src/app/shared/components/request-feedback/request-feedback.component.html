@@ -1,0 +1,10 @@
+<ion-spinner *ngIf="fetching"></ion-spinner>
+
+<div class="ds44--l-padding error" *ngIf="error">
+  <p>
+    Une erreur est survenue lors de la récupération des données, les données affichées ne sont peut-être pas à jour.
+  </p>
+  <ion-button fill="outline" color="dark" (click)="retry()">Rééssayer</ion-button>
+</div>
+
+<ng-content *ngIf="!fetching"></ng-content>
