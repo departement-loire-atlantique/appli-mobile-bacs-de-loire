@@ -7,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SvgBacsComponent implements OnInit {
 
+  overlayHidden = false;
+
   constructor() { }
 
   ngOnInit() {}
+
+  hideOverlay() {
+    this.overlayHidden = true;
+  }
 
 }
