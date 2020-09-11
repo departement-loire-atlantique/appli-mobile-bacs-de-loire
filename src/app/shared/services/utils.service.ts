@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { EVENTS_BDL } from '../models/constantesCD44';
 import { ApiEvent, Pertubation } from '../models/event';
-import { CurrentHoraire, Horaire, Bus, DisplayBus } from '../models/horaire';
+import { Bus, CurrentHoraire, DisplayBus, Horaire } from '../models/horaire';
 
 const { Network } = Plugins;
 

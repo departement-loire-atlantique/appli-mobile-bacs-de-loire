@@ -7,7 +7,6 @@ import { LiaisonService } from '../shared/services/liaison.service';
 export class AbstractPage implements OnDestroy {
   public subscription: Subscription;
   public liaisonService: LiaisonService;
-
   public isFetching = true;
   public hasError = false;
 
