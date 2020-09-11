@@ -33,7 +33,10 @@ export class AppComponent {
     private remoteConfigService: RemoteConfigService
   ) {
     this.initializeApp();
-    AdMob.initialize();
+
+    if (this.platform.is('capacitor')) {
+      AdMob.initialize();
+    }
   }
 
   initializeApp() {

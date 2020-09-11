@@ -30,18 +30,24 @@ export class HomePage implements AfterViewInit {
       this.handleBackButton();
     });
 
-    AdMob.prepareInterstitial({
-      adId: environment.adMobId,
-      autoshow: true
-    });
+    this.showInterstitial();
+  }
 
-    AdMob.addListener('onAdLoaded', () => {
-      AdMob.showInterstitial();
-    });
+  showInterstitial() {
+    if (this.platform.is('capacitor')) {
+      AdMob.prepareInterstitial({
+        adId: environment.adMobId,
+        autoshow: true
+      });
 
-    AdMob.addListener('onAdFailedToLoad', (info: boolean) => {
-      console.log(info);
-    });
+      AdMob.addListener('onAdLoaded', () => {
+        AdMob.showInterstitial();
+      });
+
+      AdMob.addListener('onAdFailedToLoad', (info: boolean) => {
+        console.log(info);
+      });
+    }
   }
 
   handleBackButton() {

@@ -59,3 +59,13 @@ button {
     width: 95%;
   }
 }
+
+.alert-modal {
+  .alert-button {
+    color: #000;
+
+    &:not(.secondary) {
+      font-weight: bold;
+    }
+  }
+}
