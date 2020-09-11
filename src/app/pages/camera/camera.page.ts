@@ -2,7 +2,6 @@ import { Component, Injector } from '@angular/core';
 
 import { ApiService } from '../../shared/services/api.service';
 import { AbstractPage } from '../abstract';
-import { LiaisonService } from 'src/app/shared/services/liaison.service';
 
 @Component({
   selector: 'app-camera',
