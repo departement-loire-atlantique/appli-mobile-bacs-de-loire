@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { Plugins } from '@capacitor/core';
+import { AppState, Plugins } from '@capacitor/core';
 import { IonRouterOutlet, MenuController, Platform } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { langFr } from 'src/app/shared/models/constantesCD44';
 import { ApiService } from 'src/app/shared/services/api.service';
 
 import { environment } from '../../../environments/environment';
 import { LiaisonService } from '../../shared/services/liaison.service';
+import { UtilsService } from '../../shared/services/utils.service';
 
 const { App, AdMob, SplashScreen } = Plugins;
 
@@ -18,19 +20,35 @@ export class HomePage implements AfterViewInit {
 
   @ViewChild('svg') svg: ElementRef;
   private displayedElements: HTMLElement[] = [];
+  private appStateChangeSubscription: Subscription;
 
   constructor(
     private liaisonService: LiaisonService,
     private menuController: MenuController,
     private apiService: ApiService,
     private routerOutlet: IonRouterOutlet,
-    private platform: Platform
+    private platform: Platform,
+    private utils: UtilsService
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.handleBackButton();
     });
 
     this.showInterstitial();
+  }
+
+  ionViewWillEnter() {
+    this.appStateChangeSubscription = this.utils.appStateChangeDetector().subscribe((status: AppState) => {
+      if (status.isActive) {
+        this.getEvents();
+      }
+    });
+  }
+
+  ionViewDidLeave() {
+    if (this.appStateChangeSubscription) {
+      this.appStateChangeSubscription.unsubscribe();
+    }
   }
 
   showInterstitial() {
@@ -58,10 +76,7 @@ export class HomePage implements AfterViewInit {
 
   ngAfterViewInit(): void {
     SplashScreen.hide();
-    // this.hideEvent(); To PROD
-    // this.showEvents(); To PROD
-    this.showEvent('#perturbation-bi-i', 'clp', 'south');
-    this.showEvent('#perturbation-c-lp', 'bii', 'south');
+    this.getEvents();
   }
 
   openLiaison(id: string, direction: string) {
@@ -72,9 +87,12 @@ export class HomePage implements AfterViewInit {
     this.menuController.toggle();
   }
 
-  async showEvents() {
+  async getEvents() {
+    this.hideEvents();
+
     const firstEvents = await this.apiService.getEvent(langFr.COUERON, langFr.LEPELLERIN);
     const secondtEvents = await this.apiService.getEvent(langFr.BASSEINDRE, langFr.INDRET);
+
     if (firstEvents && firstEvents.length) {
       this.showEvent('#perturbation-bi-i', 'clp', 'south');
     }
@@ -94,7 +112,7 @@ export class HomePage implements AfterViewInit {
     this.displayedElements.push(zone);
   }
 
-  hideEvent() {
+  hideEvents() {
     if (this.displayedElements && this.displayedElements.length) {
       this.displayedElements.forEach((element: any) => {
         element.classList.remove('pertubation-visible');

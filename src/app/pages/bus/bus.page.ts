@@ -1,8 +1,6 @@
 import { Component, Injector } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { DisplayBus } from 'src/app/shared/models/horaire';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { UtilsService } from 'src/app/shared/services/utils.service';
 
 import { Direction } from '../../shared/models/liaison';
 import { AbstractPage } from '../abstract';
@@ -16,36 +14,28 @@ const items: any[] = [{ sens: 1, terminus: 'Mendès France - Bellevue', infotraf
 })
 export class BusPage extends AbstractPage {
 
-  infosLiaison: Direction;
-  displayBus: DisplayBus[];
+  public infosLiaison: Direction;
+  public displayBus: DisplayBus[];
 
   constructor(
     injector: Injector,
-    private utilService: UtilsService,
-    private apiService: ApiService,
     private platform: Platform
   ) {
     super(injector);
   }
 
-  ionViewWillEnter() {
-    this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.getDataBus();
-    });
-  }
-
-  async getDataBus() {
+  async getData() {
     this.startRequest();
 
     this.infosLiaison = this.liaisonService.getCurrent();
 
     try {
       if (!this.platform.is('capacitor')) {
-        this.displayBus = this.utilService.formatBus(items);
+        this.displayBus = this.utils.formatBus(items);
       } else {
         const bus = await this.apiService.getHoraireBus(this.infosLiaison.from.codeBus);
         if (bus && bus.length) {
-          this.displayBus = this.utilService.formatBus(bus);
+          this.displayBus = this.utils.formatBus(bus);
         }
       }
     } catch (error) {

@@ -1,7 +1,6 @@
 import { Component, Injector } from '@angular/core';
 
 import { Dock } from '../../shared/models/liaison';
-import { ApiService } from '../../shared/services/api.service';
 import { AbstractPage } from '../abstract';
 
 @Component({
@@ -18,17 +17,11 @@ export class CameraPage extends AbstractPage {
   public startPoint: Dock;
   public endPoint: Dock;
 
-  constructor(private apiService: ApiService, injector: Injector) {
+  constructor(injector: Injector) {
     super(injector);
   }
 
-  ionViewWillEnter() {
-    this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.getWebcams();
-    });
-  }
-
-  async getWebcams() {
+  async getData() {
     this.startRequest();
 
     const currentDirection = this.liaisonService.getCurrent();

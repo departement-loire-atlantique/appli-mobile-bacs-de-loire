@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { Observable } from 'rxjs';
 
-import { EVENTS_BDL } from '../models/constantesCD44';
 import { ApiEvent, Pertubation } from '../models/event';
 import { Bus, CurrentHoraire, DisplayBus, Horaire } from '../models/horaire';
 
-const { Network } = Plugins;
+const { App, Network } = Plugins;
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +25,19 @@ export class UtilsService {
     });
   }
 
+  /**
+   * Hook the appStateChange event
+   */
+  appStateChangeDetector() {
+    return new Observable(observer => {
+      App.addListener('appStateChange', (state: AppState) => {
+        observer.next(state);
+      });
+    });
+  }
+
   getEventsList(apiEvents?: ApiEvent[]): Pertubation[] {
-    // TODO : Remplacer EVENT_MOCK par apiEvents
-    return EVENTS_BDL.map(event => {
+    return apiEvents.map(event => {
       return this.formatEvent(event);
     });
   }
