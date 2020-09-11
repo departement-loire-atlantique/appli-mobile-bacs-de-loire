@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Plugins } from '@capacitor/core';
+import { AppState, Plugins } from '@capacitor/core';
 import { Observable } from 'rxjs';
 
 import { ApiEvent, Pertubation } from '../models/event';

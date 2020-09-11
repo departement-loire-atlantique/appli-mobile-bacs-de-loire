@@ -1,4 +1,4 @@
-import { Component, Injector, OnDestroy } from '@angular/core';
+import { Component, Injector, NgZone, OnDestroy } from '@angular/core';
 import { AppState } from '@capacitor/core';
 import { Subscription } from 'rxjs';
 
@@ -11,6 +11,7 @@ export class AbstractPage implements OnDestroy {
   public liaisonService: LiaisonService;
   public utils: UtilsService;
   public apiService: ApiService;
+  public zone: NgZone;
 
   private appStateChangeSubscription: Subscription;
   public subscription: Subscription;
@@ -21,6 +22,7 @@ export class AbstractPage implements OnDestroy {
     this.liaisonService = injector.get(LiaisonService);
     this.utils = injector.get(UtilsService);
     this.apiService = injector.get(ApiService);
+    this.zone = injector.get(NgZone);
   }
 
   ionViewWillEnter() {
@@ -41,7 +43,9 @@ export class AbstractPage implements OnDestroy {
   addAppStateChangeDetector() {
     this.appStateChangeSubscription = this.utils.appStateChangeDetector().subscribe((status: AppState) => {
       if (status.isActive) {
-        this.getData();
+        this.zone.run(() => {
+          this.getData();
+        });
       }
     });
   }

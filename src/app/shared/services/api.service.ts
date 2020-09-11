@@ -55,7 +55,7 @@ export class ApiService {
   async getLatestWebcam(typeWebcam: string): Promise<string> {
     const download: HttpDownloadFileResult = await Http.downloadFile({
       url: environment.apiUrl + `/webcam?id=${typeWebcam}`,
-      filePath: 'webcam.jpg',
+      filePath: `webcam-${typeWebcam}.jpg`,
       fileDirectory: FilesystemDirectory.Data
     });
 
@@ -63,7 +63,7 @@ export class ApiService {
     if (download.path) {
       // This will return a base64 !
       const read = await Filesystem.readFile({
-        path: 'webcam.jpg',
+        path: `webcam-${typeWebcam}.jpg`,
         directory: FilesystemDirectory.Data
       });
 
