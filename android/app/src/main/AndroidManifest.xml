@@ -23,7 +23,6 @@
             android:launchMode="singleTask">
 
             <intent-filter>
-                <data android:scheme="geo" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

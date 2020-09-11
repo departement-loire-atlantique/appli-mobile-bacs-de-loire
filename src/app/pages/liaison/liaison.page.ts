@@ -1,34 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+import { Direction } from '../../shared/models/liaison';
 import { LiaisonService } from '../../shared/services/liaison.service';
-
 
 @Component({
   selector: 'app-liaison',
   templateUrl: './liaison.page.html',
   styleUrls: ['./liaison.page.scss'],
 })
-export class LiaisonPage implements OnInit, OnDestroy {
+export class LiaisonPage implements OnInit {
 
-  public startPoint: string;
-  public endPoint: string;
+  public direction: Direction;
 
   constructor(private liaisonService: LiaisonService) { }
 
   ngOnInit() {
-
     this.liaisonService.currentDirectionObserver.subscribe(() => {
-      const params = this.liaisonService.getCurrent();
-      this.startPoint = params.from;
-      this.endPoint = params.to;
+      this.direction = this.liaisonService.getCurrent();
     });
   }
 
   async changeQuai() {
     this.liaisonService.changeDirection();
-  }
-
-  ngOnDestroy() {
   }
 
 }

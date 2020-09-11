@@ -41,7 +41,7 @@ export class HorairePage extends AbstractPage {
       this.handleError();
     }
 
-    this.currentHoraire = this.utilService.getCurrentHoraire(params.from, schedule);
+    this.currentHoraire = this.utilService.getCurrentHoraire(params.from.name, schedule);
 
     this.endRequest();
   }

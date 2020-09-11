@@ -1,5 +1,6 @@
 import { Component, Injector } from '@angular/core';
 
+import { Dock } from '../../shared/models/liaison';
 import { ApiService } from '../../shared/services/api.service';
 import { AbstractPage } from '../abstract';
 
@@ -13,7 +14,9 @@ export class CameraPage extends AbstractPage {
   public firstWebcam: string;
   public secondWebcam: string;
   public date: Date;
-  public currentLiaison: any;
+
+  public startPoint: Dock;
+  public endPoint: Dock;
 
   constructor(private apiService: ApiService, injector: Injector) {
     super(injector);
@@ -28,17 +31,19 @@ export class CameraPage extends AbstractPage {
   async getWebcams() {
     this.startRequest();
 
-    this.currentLiaison = this.liaisonService.getCurrentLiaison();
     const currentDirection = this.liaisonService.getCurrent();
 
+    this.startPoint = currentDirection.from;
+    this.endPoint = currentDirection.to;
+
     try {
-      this.firstWebcam = await this.apiService.getLatestWebcam(currentDirection.data.webcamIds[0]);
+      this.firstWebcam = await this.apiService.getLatestWebcam(this.startPoint.webcamId);
     } catch (error) {
       this.handleError();
     }
 
     try {
-      this.secondWebcam = await this.apiService.getLatestWebcam(currentDirection.data.webcamIds[1]);
+      this.secondWebcam = await this.apiService.getLatestWebcam(this.endPoint.webcamId);
     } catch (error) {
       this.handleError();
     }

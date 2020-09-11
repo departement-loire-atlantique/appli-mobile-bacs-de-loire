@@ -6,15 +6,15 @@ export interface Liaison {
 }
 
 export interface Direction {
-  from?: string;
-  to?: string;
+  from?: Dock;
+  to?: Dock;
+  direction?: string;
   codeHoraire?: string;
-  data?: Dock;
 }
 
 export interface Dock {
   name?: string;
-  webcamIds?: string[];
+  webcamId?: string;
   codeBus?: string;
   location?: {
     lat?: string,

@@ -36,7 +36,7 @@ export class PertubationPage extends AbstractPage {
     const params = this.liaisonService.getCurrent();
 
     try {
-      this.eventsList = await this.apiService.getEvent(params.from, params.to);
+      this.eventsList = await this.apiService.getEvent(params.from.name, params.to.name);
     } catch (error) {
       this.handleError();
     }

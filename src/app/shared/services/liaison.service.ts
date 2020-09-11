@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { Direction, Liaison } from '../models/liaison';
+import { Direction, Dock, Liaison } from '../models/liaison';
 
 @Injectable({
   providedIn: 'root'
@@ -41,11 +41,6 @@ export class LiaisonService {
     return environment.liaisons.find(item => item.id === this.currentLiaisonId);
   }
 
-  private getCurrentDirectionData() {
-    const currentLiaison = this.getCurrentLiaison();
-    return currentLiaison[this.getDirectionName()];
-  }
-
   /**
    * When selecting the north dock, the direction is south and vice versa
    */
@@ -57,18 +52,18 @@ export class LiaisonService {
    * Returns the name of the start point according to the direction
    * start point = !direction (south when going north and vice versa)
    */
-  getStartPoint(): string {
+  getStartPoint(): Dock {
     const currentLiaison = this.getCurrentLiaison();
-    return currentLiaison[this.getDirectionName()].name;
+    return currentLiaison[this.getDirectionName()];
   }
 
   /**
    * Returns the name of the end point according to the direction
    * end point = direction (north when going north)
    */
-  getEndPoint(): string {
+  getEndPoint(): Dock {
     const currentLiaison = this.getCurrentLiaison();
-    return currentLiaison[this.currentDirection].name;
+    return currentLiaison[this.currentDirection];
   }
 
   getCurrent(): Direction {
@@ -76,8 +71,8 @@ export class LiaisonService {
     const current: Direction = {
       from: this.getStartPoint(),
       to: this.getEndPoint(),
-      codeHoraire: currentLiaison.codeHoraire,
-      data: this.getCurrentDirectionData()
+      direction: this.currentDirection,
+      codeHoraire: currentLiaison.codeHoraire
     };
     return current;
   }
