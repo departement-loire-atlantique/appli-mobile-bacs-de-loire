@@ -19,7 +19,7 @@ export const environment = {
       codeHoraire: 'liaison1',
       north: {
         name: 'Couëron',
-        webcamIds: ['coueron1', 'coueron2'],
+        webcamId: 'coueron1',
         codeBus: 'CBAC',
         location: {
           lat: '47.205729',
@@ -30,7 +30,7 @@ export const environment = {
       },
       south: {
         name: 'Le Pellerin',
-        webcamIds: ['coueron1', 'coueron2'],
+        webcamId: 'coueron2',
         codeBus: 'LPBA',
         location: {
           lat: '47.203055',
@@ -45,7 +45,7 @@ export const environment = {
       codeHoraire: 'liaison2',
       north: {
         name: 'Basse-Indre',
-        webcamIds: ['indre1', 'indre2'],
+        webcamId: 'indre1',
         codeBus: 'BIND',
         location: {
           lat: '47.1961689',
@@ -56,7 +56,7 @@ export const environment = {
       },
       south: {
         name: 'Indret',
-        webcamIds: ['indre1', 'indre2'],
+        webcamId: 'indre2',
         codeBus: 'BIND',
         location: {
           lat: '47.1951236',

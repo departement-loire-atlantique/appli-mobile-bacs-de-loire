@@ -28,8 +28,9 @@ export class LocalisationPage extends AbstractPage {
   }
 
   getData() {
-    this.address = this.liaisonService.getCurrent().data.address;
-    this.location = this.liaisonService.getCurrent().data.location;
+    const currentDirection = this.liaisonService.getCurrent();
+    this.address = currentDirection.from.address;
+    this.location = currentDirection.from.location;
   }
 
   openMap() {
