@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Plugins } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
 
 import { SocialNetwork } from './shared/models/social-network';
 import { AnalyticsService } from './shared/services/analytics.service';
 import { NotificationsService } from './shared/services/notifications.service';
 import { RemoteConfigService } from './shared/services/remote-config.service';
+const { AdMob } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -31,6 +33,7 @@ export class AppComponent {
     private remoteConfigService: RemoteConfigService
   ) {
     this.initializeApp();
+    AdMob.initialize();
   }
 
   initializeApp() {

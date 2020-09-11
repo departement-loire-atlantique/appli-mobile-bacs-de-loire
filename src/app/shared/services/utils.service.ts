@@ -75,16 +75,15 @@ export class UtilsService {
     return currentHoraire;
   }
 
-  formatBus(apiBus: Bus[]): DisplayBus[]{
-    return apiBus.reduce( (acc, curr) => {
-    console.log('acc ', acc, 'curr ', curr);
-    const itemExists = acc.find( item => curr.ligne.numLigne === item.numeroBus && curr.sens === item.sens);
-    if (itemExists) {
-      itemExists.tempsList = [...itemExists.tempsList, curr.temps];
-    } else {
-      acc.push({numeroBus: curr.ligne.numLigne, sens: curr.sens, terminus: curr.terminus, tempsList: [curr.temps]});
-    }
-    return acc;
-  }, []);
+  formatBus(apiBus: Bus[]): DisplayBus[] {
+    return apiBus.reduce((acc, curr) => {
+      const itemExists = acc.find(item => curr.ligne.numLigne === item.numeroBus && curr.sens === item.sens);
+      if (itemExists) {
+        itemExists.tempsList = [...itemExists.tempsList, curr.temps];
+      } else {
+        acc.push({ numeroBus: curr.ligne.numLigne, sens: curr.sens, terminus: curr.terminus, tempsList: [curr.temps] });
+      }
+      return acc;
+    }, []);
   }
 }

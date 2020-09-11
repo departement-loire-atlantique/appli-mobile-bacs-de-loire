@@ -1,9 +1,13 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
+import { IonRouterOutlet, MenuController, Platform } from '@ionic/angular';
 import { langFr } from 'src/app/shared/models/constantesCD44';
 import { ApiService } from 'src/app/shared/services/api.service';
 
+import { environment } from '../../../environments/environment';
 import { LiaisonService } from '../../shared/services/liaison.service';
+
+const { App, AdMob, SplashScreen } = Plugins;
 
 @Component({
   selector: 'app-home',
@@ -18,10 +22,36 @@ export class HomePage implements AfterViewInit {
   constructor(
     private liaisonService: LiaisonService,
     private menuController: MenuController,
-    private apiService: ApiService
-  ) { }
+    private apiService: ApiService,
+    private routerOutlet: IonRouterOutlet,
+    private platform: Platform
+  ) {
+    this.platform.backButton.subscribeWithPriority(10, () => {
+      this.handleBackButton();
+    });
+
+    AdMob.prepareInterstitial({
+      adId: environment.adMobId,
+      autoshow: true
+    });
+
+    AdMob.addListener('onAdLoaded', () => {
+      AdMob.showInterstitial();
+    });
+
+    AdMob.addListener('onAdFailedToLoad', (info: boolean) => {
+      console.log(info);
+    });
+  }
+
+  handleBackButton() {
+    if (!this.routerOutlet.canGoBack()) {
+      App.exitApp();
+    }
+  }
 
   ngAfterViewInit(): void {
+    SplashScreen.hide();
     // this.hideEvent(); To PROD
     // this.showEvents(); To PROD
     this.showEvent('#perturbation-bi-i', 'clp', 'south');
