@@ -56,7 +56,7 @@ export class HomePage implements AfterViewInit {
   showInterstitial() {
     if (this.platform.is('capacitor')) {
       AdMob.prepareInterstitial({
-        adId: environment.adMobId,
+        adId: this.platform.is('ios') ? environment.adMobId.ios : environment.adMobId.android,
         autoshow: true
       });
 
