@@ -16,6 +16,10 @@ button {
   outline: none;
 }
 
+ion-header {
+  padding-top: env(safe-area-inset-top);
+}
+
 .event-modal,
 .notification-modal {
   --height: auto;
@@ -57,5 +61,15 @@ button {
 
   .modal-wrapper {
     width: 95%;
+  }
+}
+
+.alert-modal {
+  .alert-button {
+    color: #000;
+
+    &:not(.secondary) {
+      font-weight: bold;
+    }
   }
 }

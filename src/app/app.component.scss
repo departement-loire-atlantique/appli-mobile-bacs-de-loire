@@ -1,7 +1,16 @@
-ion-menu {
-  --width: 100vw;
+:host {
+  ion-menu {
+    --width: 100vw;
+    --max-width: none;
 
-  #menu {
-    height: calc(100vh - 4rem);
+    ion-content {
+      width: 100%;
+      padding-top: env(safe-area-inset-top);
+    }
+
+    #menu {
+      flex-grow: 1;
+      box-sizing: border-box;
+    }
   }
 }

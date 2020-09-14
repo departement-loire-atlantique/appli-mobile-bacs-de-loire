@@ -1,8 +1,5 @@
 import { Component, Injector } from '@angular/core';
 import { CurrentHoraire } from 'src/app/shared/models/horaire';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { LiaisonService } from 'src/app/shared/services/liaison.service';
-import { UtilsService } from 'src/app/shared/services/utils.service';
 
 import { AbstractPage } from '../abstract';
 
@@ -15,21 +12,11 @@ export class HorairePage extends AbstractPage {
 
   public currentHoraire: CurrentHoraire;
 
-  constructor(
-    private apiService: ApiService,
-    private utilService: UtilsService,
-    injector: Injector
-  ) {
+  constructor(injector: Injector) {
     super(injector);
   }
 
-  ionViewWillEnter() {
-    this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.getDataHoraire();
-    });
-  }
-
-  async getDataHoraire() {
+  async getData() {
     this.startRequest();
 
     const params = this.liaisonService.getCurrent();
@@ -41,7 +28,7 @@ export class HorairePage extends AbstractPage {
       this.handleError();
     }
 
-    this.currentHoraire = this.utilService.getCurrentHoraire(params.from.name, schedule);
+    this.currentHoraire = this.utils.getCurrentHoraire(params.from.name, schedule);
 
     this.endRequest();
   }

@@ -17,6 +17,7 @@ export const environment = {
     appId: '1:449146789897:web:4a76a721edfc535f1c98d8',
     measurementId: 'G-NCXJSBN15N'
   },
+  adMobId: 'ca-app-pub-9103443525270445/4988704899',
   liaisons: [
     {
       id: 'clp',

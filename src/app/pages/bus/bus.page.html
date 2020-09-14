@@ -1,5 +1,5 @@
 <ion-content>
-  <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getDataBus()">
+  <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getData()">
     <div class="ds44--l-padding">
       <h3 class="h3-like">Bus</h3>
       <section *ngIf="displayBus && !displayBus?.length" class="ds44-app-tuile ds44-flex-align-center">

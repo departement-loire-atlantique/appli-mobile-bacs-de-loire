@@ -41,11 +41,13 @@ export class NotificationsService {
    */
   async askForSubscription() {
     const askAlert = await this.alertController.create({
+      cssClass: 'alert-modal',
       header: 'Notifications',
       message: 'Souhaitez-vous activer les notifications ?',
       buttons: [{
         text: 'Non merci',
-        role: 'cancel'
+        role: 'cancel',
+        cssClass: 'secondary'
       }, {
         text: 'Ok',
         handler: () => {

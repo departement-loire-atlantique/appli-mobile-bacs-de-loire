@@ -4,6 +4,7 @@ import { ApiEvent, Pertubation } from 'src/app/shared/models/event';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
+
 import { AbstractPage } from '../abstract';
 
 @Component({
@@ -17,18 +18,8 @@ export class PertubationPage extends AbstractPage {
   public upcomingEvents: Pertubation[];
   public eventsList: Pertubation[];
 
-  constructor(
-    private utilService: UtilsService,
-    private apiService: ApiService,
-    injector: Injector
-  ) {
+  constructor(injector: Injector) {
     super(injector);
-  }
-
-  ionViewWillEnter() {
-    this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
-      this.getData();
-    });
   }
 
   async getData() {
@@ -45,7 +36,7 @@ export class PertubationPage extends AbstractPage {
         from = langFr.BASSEINDRE, to = langFr.INDRET;
       }
       const apiEvents = await this.apiService.getEvent(from, to);
-      this.eventsList = this.utilService.getEventsList(apiEvents);
+      this.eventsList = this.utils.getEventsList(apiEvents);
       this.currentEvents = this.eventsList.filter(el => el.status === 'en cours');
       this.upcomingEvents = this.eventsList.filter(el => el.status === 'prévisionnel');
     } catch (error) {
