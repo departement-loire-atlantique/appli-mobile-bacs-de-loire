@@ -4,8 +4,12 @@ export const langFr = {
   COUERON: 'Coueron',
   BASSEINDRE: 'Basse-Indre',
   LEPELLERIN: 'Le Pellerin',
-  INDRET: 'Indret'
-}
+  INDRET: 'Indret',
+  error: {
+    titleHome: 'Informations',
+    bodyHome: 'Une erreur est survenue, pour continuer cliquer sur votre quai',
+  }
+};
 
 export const EVENTS_BDL = [
     {
@@ -50,5 +54,4 @@ export const EVENTS_BDL = [
         longitude : '346309.9563331381',
         latitude : '6687822.358774481'
    },
- 
-]
+];

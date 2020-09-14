@@ -28,7 +28,7 @@ export class UtilsService {
 
   getEventsList(apiEvents?: ApiEvent[]): Pertubation[] {
     // TODO : Remplacer EVENT_MOCK par apiEvents
-    return EVENTS_BDL.map(event => {
+    return apiEvents.map(event => {
       return this.formatEvent(event);
     });
   }
@@ -77,7 +77,6 @@ export class UtilsService {
 
   formatBus(apiBus: Bus[]): DisplayBus[]{
     return apiBus.reduce( (acc, curr) => {
-    console.log('acc ', acc, 'curr ', curr);
     const itemExists = acc.find( item => curr.ligne.numLigne === item.numeroBus && curr.sens === item.sens);
     if (itemExists) {
       itemExists.tempsList = [...itemExists.tempsList, curr.temps];

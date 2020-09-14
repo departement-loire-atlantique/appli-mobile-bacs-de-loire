@@ -1,5 +1,6 @@
 import { Component, Injector } from '@angular/core';
-import { Pertubation } from 'src/app/shared/models/event';
+import { langFr } from 'src/app/shared/models/constantesCD44';
+import { ApiEvent, Pertubation } from 'src/app/shared/models/event';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 
@@ -36,14 +37,20 @@ export class PertubationPage extends AbstractPage {
     const params = this.liaisonService.getCurrent();
 
     try {
-      this.eventsList = await this.apiService.getEvent(params.from.name, params.to.name);
+      let from: string;
+      let to: string;
+      if (params.codeHoraire === 'liaison1') {
+        from = langFr.COUERON; to = langFr.LEPELLERIN;
+      } else if (params.codeHoraire === 'liaison2') {
+        from = langFr.BASSEINDRE, to = langFr.INDRET;
+      }
+      const apiEvents = await this.apiService.getEvent(from, to);
+      this.eventsList = this.utilService.getEventsList(apiEvents);
+      this.currentEvents = this.eventsList.filter(el => el.status === 'en cours');
+      this.upcomingEvents = this.eventsList.filter(el => el.status === 'prévisionnel');
     } catch (error) {
       this.handleError();
     }
-
-    this.eventsList = this.utilService.getEventsList();
-    this.currentEvents = this.eventsList.filter(el => el.status === 'en cours');
-    this.upcomingEvents = this.eventsList.filter(el => el.status === 'prévisionnel');
 
     this.endRequest();
   }

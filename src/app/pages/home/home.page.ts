@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { langFr } from 'src/app/shared/models/constantesCD44';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 import { LiaisonService } from '../../shared/services/liaison.service';
 
@@ -18,14 +19,15 @@ export class HomePage implements AfterViewInit {
   constructor(
     private liaisonService: LiaisonService,
     private menuController: MenuController,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private errorService: ErrorService
   ) { }
 
   ngAfterViewInit(): void {
-    // this.hideEvent(); To PROD
-    // this.showEvents(); To PROD
-    this.showEvent('#perturbation-bi-i', 'clp', 'south');
-    this.showEvent('#perturbation-c-lp', 'bii', 'south');
+     this.hideEvent();
+     this.showEvents();
+    //this.showEvent('#perturbation-bi-i', 'clp', 'south');
+    //this.showEvent('#perturbation-c-lp', 'bii', 'south');
   }
 
   openLiaison(id: string, direction: string) {
@@ -37,13 +39,17 @@ export class HomePage implements AfterViewInit {
   }
 
   async showEvents() {
-    const firstEvents = await this.apiService.getEvent(langFr.COUERON, langFr.LEPELLERIN);
-    const secondtEvents = await this.apiService.getEvent(langFr.BASSEINDRE, langFr.INDRET);
-    if (firstEvents && firstEvents.length) {
-      this.showEvent('#perturbation-bi-i', 'clp', 'south');
-    }
-    if (secondtEvents && secondtEvents.length) {
-      this.showEvent('#perturbation-c-lp', 'bii', 'south');
+    try {
+      const firstEvents = await this.apiService.getEvent(langFr.COUERON, langFr.LEPELLERIN);
+      if (firstEvents && firstEvents.length) {
+        this.showEvent('#perturbation-bi-i', 'clp', 'south');
+      }
+      const secondtEvents = await this.apiService.getEvent(langFr.BASSEINDRE, langFr.INDRET);
+      if (secondtEvents && secondtEvents.length) {
+        this.showEvent('#perturbation-c-lp', 'bii', 'south');
+      }
+    } catch (error) {
+      this.errorService.openModalError(langFr.error.titleHome, langFr.error.bodyHome);
     }
   }
 

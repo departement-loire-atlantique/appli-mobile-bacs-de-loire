@@ -1,6 +1,6 @@
 <ion-content>
   <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getData()">
-    <div class="ds44--l-padding" *ngIf="currentEvents">
+    <div class="ds44--l-padding" >
       <p *ngIf="!eventsList?.length">
         Il n’y a actuellement aucune perturbation.
       </p>
