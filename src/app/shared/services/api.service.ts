@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import '@capacitor-community/http';
 import { HttpDownloadFileResult } from '@capacitor-community/http';
 import { FilesystemDirectory, Plugins } from '@capacitor/core';
+import { Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
 import { ApiEvent } from '../models/event';
 import { Bus } from '../models/horaire';
-
 
 const { Http, Filesystem } = Plugins;
 
@@ -15,7 +15,7 @@ const { Http, Filesystem } = Plugins;
 })
 export class ApiService {
 
-  constructor() { }
+  constructor(private platform: Platform) { }
 
   async getEvent(from: string, to: string): Promise<ApiEvent[]> {
     const urlEvent = environment.apiUrl + '/traficevents?filter=Bac%20de%20Loire%20' + encodeURI(`${from} - ${to}`);
@@ -53,10 +53,18 @@ export class ApiService {
   }
 
   async getLatestWebcam(typeWebcam: string): Promise<string> {
+
+    if (this.platform.is('ios')) {
+      await Filesystem.deleteFile({
+        path: `webcam-${typeWebcam}.jpg`,
+        directory: FilesystemDirectory.Cache
+      });
+    }
+
     const download: HttpDownloadFileResult = await Http.downloadFile({
       url: environment.apiUrl + `/webcam?id=${typeWebcam}`,
       filePath: `webcam-${typeWebcam}.jpg`,
-      fileDirectory: FilesystemDirectory.Data
+      fileDirectory: FilesystemDirectory.Cache
     });
 
     // On a device the file will be written and will return a path
@@ -64,7 +72,7 @@ export class ApiService {
       // This will return a base64 !
       const read = await Filesystem.readFile({
         path: `webcam-${typeWebcam}.jpg`,
-        directory: FilesystemDirectory.Data
+        directory: FilesystemDirectory.Cache
       });
 
       return 'data:image/jpg;base64,' + read.data;
