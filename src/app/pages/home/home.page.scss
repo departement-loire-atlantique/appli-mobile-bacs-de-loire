@@ -13,6 +13,10 @@
     --ion-color-base: transparent !important;
   }
 
+  ion-content {
+    padding-top: env(safe-area-inset-top);
+  }
+
   .menu-button {
     padding: 8px;
     font-size: 1.6em;

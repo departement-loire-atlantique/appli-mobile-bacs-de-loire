@@ -16,6 +16,10 @@ button {
   outline: none;
 }
 
+ion-header {
+  padding-top: env(safe-area-inset-top);
+}
+
 .event-modal,
 .notification-modal {
   --height: auto;

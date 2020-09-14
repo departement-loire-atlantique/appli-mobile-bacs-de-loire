@@ -5,10 +5,12 @@
 
     ion-content {
       width: 100%;
+      padding-top: env(safe-area-inset-top);
     }
 
     #menu {
-      height: calc(100vh - 4rem);
+      flex-grow: 1;
+      box-sizing: border-box;
     }
   }
 }

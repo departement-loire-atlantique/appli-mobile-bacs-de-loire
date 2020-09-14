@@ -1,0 +1,11 @@
+{
+  "appId": "com.cg44.bacsloire",
+  "appName": "Bacs de Loire",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {}
+  },
+  "cordova": {}
+}
