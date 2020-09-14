@@ -4,6 +4,7 @@ import { IonRouterOutlet, MenuController, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { langFr } from 'src/app/shared/models/constantesCD44';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 import { environment } from '../../../environments/environment';
 import { LiaisonService } from '../../shared/services/liaison.service';
@@ -28,7 +29,8 @@ export class HomePage implements AfterViewInit {
     private apiService: ApiService,
     private routerOutlet: IonRouterOutlet,
     private platform: Platform,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private errorService: ErrorService
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.handleBackButton();
@@ -88,16 +90,17 @@ export class HomePage implements AfterViewInit {
   }
 
   async getEvents() {
-    this.hideEvents();
-
-    const firstEvents = await this.apiService.getEvent(langFr.COUERON, langFr.LEPELLERIN);
-    const secondtEvents = await this.apiService.getEvent(langFr.BASSEINDRE, langFr.INDRET);
-
-    if (firstEvents && firstEvents.length) {
-      this.showEvent('#perturbation-bi-i', 'clp', 'south');
-    }
-    if (secondtEvents && secondtEvents.length) {
-      this.showEvent('#perturbation-c-lp', 'bii', 'south');
+    try {
+      const firstEvents = await this.apiService.getEvent(langFr.COUERON, langFr.LEPELLERIN);
+      if (firstEvents && firstEvents.length) {
+        this.showEvent('#perturbation-bi-i', 'clp', 'south');
+      }
+      const secondtEvents = await this.apiService.getEvent(langFr.BASSEINDRE, langFr.INDRET);
+      if (secondtEvents && secondtEvents.length) {
+        this.showEvent('#perturbation-c-lp', 'bii', 'south');
+      }
+    } catch (error) {
+      this.errorService.openModalError(langFr.error.titleHome, langFr.error.bodyHome);
     }
   }
 

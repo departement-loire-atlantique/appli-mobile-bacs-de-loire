@@ -15,8 +15,9 @@ export class ErrorService {
       message: body,
       buttons: [{
         text: 'Retour',
+        role: 'cancel',
         handler: () => {
-          this.route.navigate(['home']);
+          console.log('CANCEL');
         }
       }]
     });

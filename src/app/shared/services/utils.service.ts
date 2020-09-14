@@ -37,6 +37,7 @@ export class UtilsService {
   }
 
   getEventsList(apiEvents?: ApiEvent[]): Pertubation[] {
+    // TODO : Remplacer EVENT_MOCK par apiEvents
     return apiEvents.map(event => {
       return this.formatEvent(event);
     });
@@ -84,15 +85,15 @@ export class UtilsService {
     return currentHoraire;
   }
 
-  formatBus(apiBus: Bus[]): DisplayBus[] {
-    return apiBus.reduce((acc, curr) => {
-      const itemExists = acc.find(item => curr.ligne.numLigne === item.numeroBus && curr.sens === item.sens);
-      if (itemExists) {
-        itemExists.tempsList = [...itemExists.tempsList, curr.temps];
-      } else {
-        acc.push({ numeroBus: curr.ligne.numLigne, sens: curr.sens, terminus: curr.terminus, tempsList: [curr.temps] });
-      }
-      return acc;
-    }, []);
+  formatBus(apiBus: Bus[]): DisplayBus[]{
+    return apiBus.reduce( (acc, curr) => {
+    const itemExists = acc.find( item => curr.ligne.numLigne === item.numeroBus && curr.sens === item.sens);
+    if (itemExists) {
+      itemExists.tempsList = [...itemExists.tempsList, curr.temps];
+    } else {
+      acc.push({numeroBus: curr.ligne.numLigne, sens: curr.sens, terminus: curr.terminus, tempsList: [curr.temps]});
+    }
+    return acc;
+  }, []);
   }
 }
