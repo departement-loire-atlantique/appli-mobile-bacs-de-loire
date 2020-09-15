@@ -15,17 +15,25 @@ const { Http, Filesystem } = Plugins;
 })
 export class ApiService {
 
-  constructor(private platform: Platform) { }
+  private requestParams = {};
+
+  constructor(private platform: Platform) {
+    if (!platform.is('capacitor')) {
+      this.requestParams = {
+        mode: 'no-cors'
+      };
+    }
+  }
 
   async getEvent(from: string, to: string): Promise<ApiEvent[]> {
-    const urlEvent = environment.apiUrl + '/traficevents?filter=Bac%20de%20Loire%20' + encodeURI(`${from} - ${to}`);
+    const urlEvent = environment.apiUrl + `/traficevents?filter=Bac de Loire ${from} - ${to}`;
+
     const response = await Http.request({
       method: 'GET',
       url: urlEvent,
-      params: {
-        mode: 'no-cors'
-      }
+      params: this.requestParams
     });
+
     return response.data;
   }
 
@@ -33,9 +41,7 @@ export class ApiService {
     const response = await Http.request({
       method: 'GET',
       url: environment.apiUrlBus + codeBus,
-      params: {
-        mode: 'no-cors'
-      }
+      params: this.requestParams
     });
     return response.data;
   }
@@ -44,9 +50,7 @@ export class ApiService {
     const response = await Http.request({
       method: 'GET',
       url: environment.apiUrlHoraire,
-      params: {
-        mode: 'no-cors'
-      }
+      params: this.requestParams
     });
 
     return response.data.bacs_horaires[typeLiaison];
