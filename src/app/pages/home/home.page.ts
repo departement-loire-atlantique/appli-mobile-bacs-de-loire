@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angular/core';
 import { AppState, Plugins } from '@capacitor/core';
 import { IonRouterOutlet, MenuController, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -30,7 +30,8 @@ export class HomePage implements AfterViewInit {
     private routerOutlet: IonRouterOutlet,
     private platform: Platform,
     private utils: UtilsService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private zone: NgZone
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.handleBackButton();
@@ -56,7 +57,7 @@ export class HomePage implements AfterViewInit {
   showInterstitial() {
     if (this.platform.is('capacitor')) {
       AdMob.prepareInterstitial({
-        adId: environment.adMobId,
+        adId: this.platform.is('ios') ? environment.adMobId.ios : environment.adMobId.android,
         autoshow: true
       });
 
@@ -108,7 +109,11 @@ export class HomePage implements AfterViewInit {
     if (!this.svg) {
       return;
     }
-    const clickLiaison = () => this.openLiaison(id, liaison);
+    const clickLiaison = () => {
+      this.zone.run(() => {
+        this.openLiaison(id, liaison);
+      });
+    };
     const zone = this.svg.nativeElement.querySelector(selector);
     zone.classList.add('pertubation-visible');
     zone.childNodes[2].onclick = clickLiaison;

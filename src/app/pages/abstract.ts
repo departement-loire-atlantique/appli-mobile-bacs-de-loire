@@ -7,7 +7,7 @@ import { LiaisonService } from '../shared/services/liaison.service';
 import { UtilsService } from '../shared/services/utils.service';
 
 @Component({ template: '' })
-export class AbstractPage implements OnDestroy {
+export abstract class AbstractPage implements OnDestroy {
   public liaisonService: LiaisonService;
   public utils: UtilsService;
   public apiService: ApiService;
@@ -40,6 +40,9 @@ export class AbstractPage implements OnDestroy {
     }
   }
 
+  /**
+   * Update data when the app comes back in front
+   */
   addAppStateChangeDetector() {
     this.appStateChangeSubscription = this.utils.appStateChangeDetector().subscribe((status: AppState) => {
       if (status.isActive) {
@@ -50,6 +53,9 @@ export class AbstractPage implements OnDestroy {
     });
   }
 
+  /**
+   * Update data when the network is back online
+   */
   addDirectionChangeDetector() {
     this.subscription = this.liaisonService.currentDirectionObserver.subscribe(() => {
       this.getData();
@@ -70,7 +76,7 @@ export class AbstractPage implements OnDestroy {
     this.isFetching = false;
   }
 
-  getData() { }
+  abstract getData(): void;
 
   ngOnDestroy() {
     if (this.subscription) {

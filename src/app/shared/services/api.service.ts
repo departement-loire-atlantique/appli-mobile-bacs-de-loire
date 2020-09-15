@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import '@capacitor-community/http';
 import { HttpDownloadFileResult } from '@capacitor-community/http';
 import { FilesystemDirectory, Plugins } from '@capacitor/core';
+import { Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
 import { ApiEvent } from '../models/event';
 import { Bus } from '../models/horaire';
-
 
 const { Http, Filesystem } = Plugins;
 
@@ -15,17 +15,25 @@ const { Http, Filesystem } = Plugins;
 })
 export class ApiService {
 
-  constructor() { }
+  private requestParams = {};
+
+  constructor(private platform: Platform) {
+    if (!platform.is('capacitor')) {
+      this.requestParams = {
+        mode: 'no-cors'
+      };
+    }
+  }
 
   async getEvent(from: string, to: string): Promise<ApiEvent[]> {
-    const urlEvent = environment.apiUrl + '/traficevents?filter=Bac%20de%20Loire%20' + encodeURI(`${from} - ${to}`);
+    const urlEvent = environment.apiUrl + `/traficevents?filter=Bac de Loire ${from} - ${to}`;
+
     const response = await Http.request({
       method: 'GET',
       url: urlEvent,
-      params: {
-        mode: 'no-cors'
-      }
+      params: this.requestParams
     });
+
     return response.data;
   }
 
@@ -33,9 +41,7 @@ export class ApiService {
     const response = await Http.request({
       method: 'GET',
       url: environment.apiUrlBus + codeBus,
-      params: {
-        mode: 'no-cors'
-      }
+      params: this.requestParams
     });
     return response.data;
   }
@@ -44,19 +50,25 @@ export class ApiService {
     const response = await Http.request({
       method: 'GET',
       url: environment.apiUrlHoraire,
-      params: {
-        mode: 'no-cors'
-      }
+      params: this.requestParams
     });
 
     return response.data.bacs_horaires[typeLiaison];
   }
 
   async getLatestWebcam(typeWebcam: string): Promise<string> {
+
+    if (this.platform.is('ios')) {
+      await Filesystem.deleteFile({
+        path: `webcam-${typeWebcam}.jpg`,
+        directory: FilesystemDirectory.Cache
+      });
+    }
+
     const download: HttpDownloadFileResult = await Http.downloadFile({
       url: environment.apiUrl + `/webcam?id=${typeWebcam}`,
       filePath: `webcam-${typeWebcam}.jpg`,
-      fileDirectory: FilesystemDirectory.Data
+      fileDirectory: FilesystemDirectory.Cache
     });
 
     // On a device the file will be written and will return a path
@@ -64,7 +76,7 @@ export class ApiService {
       // This will return a base64 !
       const read = await Filesystem.readFile({
         path: `webcam-${typeWebcam}.jpg`,
-        directory: FilesystemDirectory.Data
+        directory: FilesystemDirectory.Cache
       });
 
       return 'data:image/jpg;base64,' + read.data;

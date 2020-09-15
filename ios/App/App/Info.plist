@@ -83,5 +83,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+  <key>GADIsAdManagerApp</key>
+  <true/>
+
+  <key>GADApplicationIdentifier</key>
+  <string>ca-app-pub-9103443525270445~3946607038</string>
+
+  <key>NSUserTrackingUsageDescription</key>
+  <string>This identifier will be used to deliver personalized ads to you.</string>
 </dict>
 </plist>
