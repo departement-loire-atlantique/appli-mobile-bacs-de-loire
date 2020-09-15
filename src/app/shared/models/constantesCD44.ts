@@ -1,7 +1,7 @@
 
 export const KEYCHOICE = 'choix_quai';
 export const langFr = {
-  COUERON: 'Couëron',
+  COUERON: 'Coueron',
   BASSEINDRE: 'Basse-Indre',
   LEPELLERIN: 'Le Pellerin',
   INDRET: 'Indret',

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AppState, Plugins } from '@capacitor/core';
 import { Observable } from 'rxjs';
-import { PICTO_EVENTS } from '../models/constantesCD44';
 
+import { PICTO_EVENTS } from '../models/constantesCD44';
 import { ApiEvent, Pertubation } from '../models/event';
 import { Bus, CurrentHoraire, DisplayBus, Horaire } from '../models/horaire';
 
