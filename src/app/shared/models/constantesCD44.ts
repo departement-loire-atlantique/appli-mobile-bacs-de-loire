@@ -7,9 +7,22 @@ export const langFr = {
   INDRET: 'Indret',
   error: {
     titleHome: 'Informations',
-    bodyHome: 'Une erreur est survenue, pour continuer cliquer sur votre quai',
+    bodyHome: 'Une erreur est survenue. Pour continuer cliquer sur votre quai.',
   }
 };
+
+export const PICTO_EVENTS = [
+  {picto: 'brume', event: 'Brume'},
+  {picto: 'maree-basse', event: 'Marée basse'},
+  {picto: 'marree', event: 'Marée haute'},
+  {picto: 'panne', event: 'Panne'},
+  {picto: 'vent-fort', event: 'Vent fort'},
+  {picto: 'houle', event: 'Houle'},
+  {picto: 'glaces', event: 'Glaces'},
+  {picto: 'ravitaillement', event: 'Ravitaillement'},
+  {picto: 'incident', event: 'Incident'},
+  {picto: 'incident', event: 'Autre'},
+];
 
 export const EVENTS_BDL = [
     {

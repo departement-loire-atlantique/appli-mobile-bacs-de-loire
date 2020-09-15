@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppState, Plugins } from '@capacitor/core';
 import { Observable } from 'rxjs';
+import { PICTO_EVENTS } from '../models/constantesCD44';
 
 import { ApiEvent, Pertubation } from '../models/event';
 import { Bus, CurrentHoraire, DisplayBus, Horaire } from '../models/horaire';
@@ -48,13 +49,7 @@ export class UtilsService {
     let type: string;
     let datePublication: Date;
 
-    if (apiEvent.type === 'Incident') {
-      icon = 'accident';
-    } else if (apiEvent.type === 'Vent fort') {
-      icon = 'vent-fort';
-    } else {
-      icon = 'particulier';
-    }
+    icon = this.getIconEvent(apiEvent.type);
     type = apiEvent.type;
     datePublication = new Date(apiEvent.datePublication.toString().split(' ')[0]);
     return {
@@ -95,5 +90,14 @@ export class UtilsService {
     }
     return acc;
   }, []);
+  }
+
+  getIconEvent(type: string): string{
+    let icon = 'particulier';
+    const pictoEvent = PICTO_EVENTS.find(el => el.event === type);
+    if (pictoEvent){
+      icon = pictoEvent.picto;
+    }
+    return icon;
   }
 }
