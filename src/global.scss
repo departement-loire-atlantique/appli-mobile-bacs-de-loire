@@ -12,6 +12,10 @@
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
 
+@import "~design-system-web/dist/css/cd44.min.css";
+@import "~design-system-web/dist/css/fonts.css";
+@import "~design-system-web/dist/css/icons.css";
+
 button {
   outline: none;
 }
