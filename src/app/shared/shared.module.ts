@@ -6,17 +6,13 @@ import { BackButtonComponent } from './components/back-button/back-button.compon
 import { PertubationsComponent } from './components/pertubations/pertubations.component';
 import { PushModalComponent } from './components/push-modal/push-modal.component';
 import { RequestFeedbackComponent } from './components/request-feedback/request-feedback.component';
-import { SvgBacsComponent } from './components/svg-bacs/svg-bacs.component';
-
-
 
 @NgModule({
   declarations: [
     BackButtonComponent,
     PertubationsComponent,
     PushModalComponent,
-    RequestFeedbackComponent,
-    SvgBacsComponent
+    RequestFeedbackComponent
   ],
   providers: [],
   entryComponents: [
@@ -30,8 +26,7 @@ import { SvgBacsComponent } from './components/svg-bacs/svg-bacs.component';
     BackButtonComponent,
     PushModalComponent,
     PertubationsComponent,
-    RequestFeedbackComponent,
-    SvgBacsComponent
+    RequestFeedbackComponent
   ]
 })
 export class SharedModule { }

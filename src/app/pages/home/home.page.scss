@@ -11,10 +11,12 @@
   ion-toolbar {
     --background: transparent;
     --ion-color-base: transparent !important;
+    padding-top: 0 !important;
   }
-
-  ion-content {
-    padding-top: env(safe-area-inset-top);
+  
+  .content-wrapper {
+    margin-top: env(safe-area-inset-top);
+    padding-top: 60px;
   }
 
   .menu-button {
