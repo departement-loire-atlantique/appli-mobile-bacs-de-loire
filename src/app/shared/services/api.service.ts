@@ -26,7 +26,13 @@ export class ApiService {
   }
 
   async getEvent(from: string, to: string): Promise<ApiEvent[]> {
-    const urlEvent = environment.apiUrl + `/traficevents?filter=Bac de Loire ${from} - ${to}`;
+    let args = `Bac de Loire ${from} - ${to}`;
+
+    if (this.platform.is('ios')) {
+      args = encodeURI(args);
+    }
+
+    const urlEvent = environment.apiUrl + `/traficevents?filter=${args}`;
 
     const response = await Http.request({
       method: 'GET',
