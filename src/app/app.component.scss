@@ -4,12 +4,12 @@
 
     ion-content {
       width: 100%;
-      top: var(--ion-statusbar-padding) !important;
     }
   
     #menu {
       box-sizing: border-box;
       height: 100%;
+      padding-top: calc(2rem + env(safe-area-inset-top)) !important;
     }
   }
 }
