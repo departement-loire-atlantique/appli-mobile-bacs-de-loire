@@ -1,18 +1,17 @@
 <ion-content>
   <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getData()">
-    <div class="ds44--l-padding" >
+    <div class="ds44--l-padding">
       <p *ngIf="!eventsList?.length">
         Il n’y a actuellement aucune perturbation.
       </p>
       <section class="ds44-app-tuile" *ngIf="currentEvents?.length">
-        <h3 class="h3-like">Pertubation en cours</h3>
+        <h3 class="h3-like">Pertubations en cours</h3>
         <app-pertubations *ngFor="let evenement of currentEvents" [pertubation]="evenement"></app-pertubations>
       </section>
       <section class="ds44-app-tuile" *ngIf="upcomingEvents?.length">
-        <h3 class="h3-like">Pertubation à venir</h3>
+        <h3 class="h3-like">Pertubations à venir</h3>
         <app-pertubations *ngFor="let evenement of upcomingEvents" [pertubation]="evenement"></app-pertubations>
       </section>
     </div>
   </app-request-feedback>
 </ion-content>
-
