@@ -1,12 +1,12 @@
 <ion-content>
   <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getData()">
     <div class="ds44--l-padding">
-      <h3 class="h3-like">Bus</h3>
       <section *ngIf="displayBus && !displayBus?.length" class="ds44-app-tuile ds44-flex-align-center">
         FIN DE SERVICE
       </section>
       <div *ngIf="displayBus && displayBus.length">
-        <div *ngFor="let bus of displayBus">
+        <div *ngFor="let bus of displayBus" class="bus-section">
+          <h3 class="h3-like">Bus</h3>
           <section class="ds44-app-tuile">
             <div class="ds44-flex-container ds44-flex-valign-center ds44-mb2 ds44-lightBG">
               <div class="ds44-card__dateContainer ds44-flex-container ds44-flex-align-center" aria-hidden="true">
@@ -21,7 +21,7 @@
             </div>
           </section>
 
-          <h3 class="h3-like">Prochains départs</h3>
+          <h4 class="h4-like">Prochains départs</h4>
           <div *ngFor="let temps of bus.tempsList; let isFirst = 'first'">
             <section class="ds44-app-tuile ds44-app-tuile__bacs">
               <div class="ds44-mb2 " [ngClass]="isFirst?'ds44-theme':'ds44-lightBG'">

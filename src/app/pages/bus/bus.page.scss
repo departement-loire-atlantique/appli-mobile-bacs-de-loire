@@ -1,4 +1,10 @@
-.ds44-card__dateContainer {
-  background-color: #ffc134;
-  min-height: 10rem;
+:host {
+  .ds44-card__dateContainer {
+    background-color: #ffc134;
+    min-height: 10rem;
+  }
+
+  .bus-section:not(:first-child) {
+    margin-top: 50px;
+  }
 }
