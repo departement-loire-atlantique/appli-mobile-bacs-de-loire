@@ -118,6 +118,7 @@ export class NotificationsService {
 
     // Only for IOS, android will always return granted
     PushNotifications.requestPermission().then((result) => {
+      console.log(result);
       if (result.granted) {
         PushNotifications.register();
       }
@@ -126,10 +127,15 @@ export class NotificationsService {
     // Subsribe to topic if registration succeeded
     PushNotifications.addListener('registration', (token: PushNotificationToken) => {
       this.getSubscriptions().then(subs => {
-        for (const key in subs) {
-          if (Object.prototype.hasOwnProperty.call(subs, key)) {
-            if (subs[key]) {
-              this.subscribe(key);
+        if (!Object.keys(subs).length) {
+          this.subscribe('clp');
+          this.subscribe('bii');
+        } else {
+          for (const key in subs) {
+            if (Object.prototype.hasOwnProperty.call(subs, key)) {
+              if (subs[key]) {
+                this.subscribe(key);
+              }
             }
           }
         }
