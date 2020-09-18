@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { Platform } from '@ionic/angular';
 
 import { AbstractPage } from '../abstract';
@@ -8,7 +8,7 @@ import { AbstractPage } from '../abstract';
   templateUrl: './localisation.page.html',
   styleUrls: ['./localisation.page.scss'],
 })
-export class LocalisationPage extends AbstractPage implements OnInit {
+export class LocalisationPage extends AbstractPage {
 
   public address = '';
   public location: {
@@ -19,14 +19,6 @@ export class LocalisationPage extends AbstractPage implements OnInit {
 
   constructor(injector: Injector, private platform: Platform) {
     super(injector);
-  }
-
-  ngOnInit() {
-    this.getData();
-  }
-
-  ionViewWillEnter() {
-    // Override parent default
   }
 
   getData() {
