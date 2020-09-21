@@ -13,7 +13,6 @@
 @import "~@ionic/angular/css/core.css";
 
 @import "~design-system-web/dist/css/cd44.min.css";
-@import "~design-system-web/dist/css/fonts.css";
 @import "~design-system-web/dist/css/icons.css";
 
 button {
@@ -22,6 +21,12 @@ button {
 
 ion-header {
   padding-top: env(safe-area-inset-top);
+}
+
+.modal-wrapper {
+  ion-header {
+    padding-top: 0;
+  }
 }
 
 .event-modal,
