@@ -1,4 +1,7 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getData()">
     <div class="ds44--l-padding">
       <section class="ds44-app-tuile ds44-app-tuile__bacs">

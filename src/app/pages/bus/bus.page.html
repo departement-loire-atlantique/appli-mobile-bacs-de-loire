@@ -1,4 +1,7 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getData($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getData()">
     <div class="ds44--l-padding">
       <section *ngIf="displayBus.length === 0 && !hasError" class="ds44-app-tuile ds44-flex-align-center">
@@ -14,7 +17,7 @@
               </div>
 
               <div class="ds44--m-padding ds44-fg1 ds44-center">
-                <p>{{ infosLiaison.from.name === 'Indret'? 'Basse-Indre' : infosLiaison.from.name }}</p>
+                <p>{{ infosLiaison.to.name === 'Indret'? 'Basse-Indre' : infosLiaison.to.name }}</p>
                 <p><i class="icon icon-arrow-down" aria-hidden="true"></i></p>
                 <p>{{ bus.terminus }}</p>
               </div>
