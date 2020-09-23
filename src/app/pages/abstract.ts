@@ -76,7 +76,7 @@ export abstract class AbstractPage implements OnDestroy {
     this.isFetching = false;
   }
 
-  abstract getData(event?: any): void;
+  abstract getData(): void;
 
   ngOnDestroy() {
     if (this.subscription) {

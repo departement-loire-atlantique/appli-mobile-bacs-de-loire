@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { EVENTS_BDL, langFr } from 'src/app/shared/models/constantesCD44';
+import { langFr, EVENTS_BDL } from 'src/app/shared/models/constantesCD44';
 import { ApiEvent, Pertubation } from 'src/app/shared/models/event';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -22,7 +22,7 @@ export class PertubationPage extends AbstractPage {
     super(injector);
   }
 
-  async getData() {
+  async getData(event?: any) {
     this.startRequest();
 
     const params = this.liaisonService.getCurrent();
@@ -44,7 +44,9 @@ export class PertubationPage extends AbstractPage {
     } catch (error) {
       this.handleError();
     }
-
+    if (event) {
+      event.target.complete();
+    }
     this.endRequest();
   }
 

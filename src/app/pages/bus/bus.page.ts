@@ -24,7 +24,7 @@ export class BusPage extends AbstractPage {
     super(injector);
   }
 
-  async getData() {
+  async getData(event?: any) {
     this.startRequest();
 
     this.infosLiaison = this.liaisonService.getCurrent();
@@ -41,7 +41,9 @@ export class BusPage extends AbstractPage {
     } catch (error) {
       this.handleError();
     }
-
+    if (event) {
+      event.target.complete();
+    }
     this.endRequest();
 
   }

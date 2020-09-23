@@ -16,7 +16,7 @@ export class HorairePage extends AbstractPage {
     super(injector);
   }
 
-  async getData() {
+  async getData(event?: any) {
     this.startRequest();
 
     const params = this.liaisonService.getCurrent();
@@ -29,7 +29,9 @@ export class HorairePage extends AbstractPage {
     }
 
     this.currentHoraire = this.utils.getCurrentHoraire(params.from.name, schedule);
-
+    if (event) {
+      event.target.complete();
+    }
     this.endRequest();
   }
 

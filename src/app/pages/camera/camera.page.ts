@@ -21,7 +21,7 @@ export class CameraPage extends AbstractPage {
     super(injector);
   }
 
-  async getData() {
+  async getData(event?: any) {
     this.startRequest();
 
     const currentDirection = this.liaisonService.getCurrent();
@@ -42,7 +42,9 @@ export class CameraPage extends AbstractPage {
     }
 
     this.date = new Date();
-
+    if (event) {
+      event.target.complete();
+    }
     this.endRequest();
   }
 
