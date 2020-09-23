@@ -80,6 +80,9 @@ export class HomePage implements AfterViewInit {
   ngAfterViewInit(): void {
     SplashScreen.hide();
     this.getEvents();
+    // TODO MOCK to show liaison events. Delete for PROD
+    // this.showEvent('#perturbation-bi-i', 'clp', 'south');
+    // this.showEvent('#perturbation-c-lp', 'bii', 'south');
   }
 
   openLiaison(id: string, direction: string) {

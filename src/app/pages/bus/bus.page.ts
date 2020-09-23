@@ -15,7 +15,7 @@ const items: any[] = [{ sens: 1, terminus: 'Mendès France - Bellevue', infotraf
 export class BusPage extends AbstractPage {
 
   public infosLiaison: Direction;
-  public displayBus: DisplayBus[];
+  public displayBus: DisplayBus[] = [];
 
   constructor(
     injector: Injector,
@@ -33,7 +33,7 @@ export class BusPage extends AbstractPage {
       if (!this.platform.is('capacitor')) {
         this.displayBus = this.utils.formatBus(items);
       } else {
-        const bus = await this.apiService.getHoraireBus(this.infosLiaison.from.codeBus);
+        const bus = await this.apiService.getHoraireBus(this.infosLiaison.to.codeBus);
         if (bus && bus.length) {
           this.displayBus = this.utils.formatBus(bus);
         }
@@ -43,6 +43,7 @@ export class BusPage extends AbstractPage {
     }
 
     this.endRequest();
+
   }
 
 }

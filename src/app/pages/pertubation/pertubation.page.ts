@@ -1,5 +1,5 @@
 import { Component, Injector } from '@angular/core';
-import { langFr } from 'src/app/shared/models/constantesCD44';
+import { EVENTS_BDL, langFr } from 'src/app/shared/models/constantesCD44';
 import { ApiEvent, Pertubation } from 'src/app/shared/models/event';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { UtilsService } from 'src/app/shared/services/utils.service';
@@ -37,6 +37,8 @@ export class PertubationPage extends AbstractPage {
       }
       const apiEvents = await this.apiService.getEvent(from, to);
       this.eventsList = this.utils.getEventsList(apiEvents);
+      // TODO Mock to show pertubation. Delete for PROD
+      // this.eventsList = this.utils.getEventsList(EVENTS_BDL);
       this.currentEvents = this.eventsList.filter(el => el.status === 'en cours');
       this.upcomingEvents = this.eventsList.filter(el => el.status === 'prévisionnel');
     } catch (error) {
