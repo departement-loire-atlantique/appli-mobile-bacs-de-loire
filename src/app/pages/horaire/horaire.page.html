@@ -3,7 +3,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getData()">
-    <div class="ds44--l-padding">
+    <div class="ds44--l-padding" *ngIf="!hasError">
       <section class="ds44-app-tuile ds44-app-tuile__bacs">
         <h3 class="h3-like">Premier départ</h3>
         <div class="ds44-mb2 ds44-lightBG">
