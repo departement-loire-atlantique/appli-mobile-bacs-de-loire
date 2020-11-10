@@ -16,6 +16,7 @@ export class BusPage extends AbstractPage {
 
   public infosLiaison: Direction;
   public displayBus: DisplayBus[] = [];
+  public noBus: boolean;
 
   constructor(
     injector: Injector,
@@ -29,23 +30,30 @@ export class BusPage extends AbstractPage {
 
     this.infosLiaison = this.liaisonService.getCurrent();
 
-    try {
-      if (!this.platform.is('capacitor')) {
-        this.displayBus = this.utils.formatBus(items);
-      } else {
-        const bus = await this.apiService.getHoraireBus(this.infosLiaison.to.codeBus);
-        if (bus && bus.length) {
-          this.displayBus = this.utils.formatBus(bus);
+    this.noBus = this.infosLiaison.codeHoraire === 'liaison2' && this.infosLiaison.direction === 'south';
+
+    if (!this.noBus) {
+      try {
+        if (!this.platform.is('capacitor')) {
+          this.displayBus = this.utils.formatBus(items);
+        } else {
+          const bus = await this.apiService.getHoraireBus(this.infosLiaison.to.codeBus);
+          if (bus && bus.length) {
+            this.displayBus = this.utils.formatBus(bus);
+          }
         }
+      } catch (error) {
+        this.handleError();
       }
-    } catch (error) {
-      this.handleError();
+    } else {
+      this.displayBus = [];
     }
+
     if (event) {
       event.target.complete();
     }
-    this.endRequest();
 
+    this.endRequest();
   }
 
 }

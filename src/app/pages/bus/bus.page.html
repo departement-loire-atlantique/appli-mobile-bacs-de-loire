@@ -4,20 +4,26 @@
   </ion-refresher>
   <app-request-feedback [fetching]="isFetching" [error]="hasError" (clickRetry)="getData()">
     <div class="ds44--l-padding" *ngIf="!hasError">
-      <section *ngIf="displayBus.length === 0 " class="ds44-app-tuile ds44-flex-align-center">
+
+      <section *ngIf="noBus">
+        Aucun bus n'est disponible pour cette liaison.
+      </section>
+
+      <section *ngIf="displayBus.length === 0 && !noBus" class="ds44-app-tuile ds44-flex-align-center">
         <h3 class="h3-like">FIN DE SERVICE</h3>
       </section>
-      <div *ngIf="displayBus && displayBus.length">
+
+      <div *ngIf="displayBus && displayBus.length && !noBus">
         <div *ngFor="let bus of displayBus" class="bus-section">
-          <h3 class="h3-like">Bus</h3>
-          <section class="ds44-app-tuile">           
+          <h3 class="h3-like">Bus à l'arrivé</h3>
+          <section class="ds44-app-tuile">
             <div class="ds44-flex-container ds44-flex-valign-center ds44-mb2 ds44-lightBG">
               <div class="ds44-card__dateContainer ds44-flex-container ds44-flex-align-center" aria-hidden="true">
                 <p><span class="ds44-cardDateNumber">{{ bus.numeroBus }}</span></p>
               </div>
 
               <div class="ds44--m-padding ds44-fg1 ds44-center">
-                <p>{{ infosLiaison.to.name === 'Indret'? 'Basse-Indre' : infosLiaison.to.name }}</p>
+                <p>{{ infosLiaison.to.name === 'Indret'? 'Basse-Indre' : infosLiaison.to.libelleBus }}</p>
                 <p><i class="icon icon-arrow-down" aria-hidden="true"></i></p>
                 <p>{{ bus.terminus }}</p>
               </div>

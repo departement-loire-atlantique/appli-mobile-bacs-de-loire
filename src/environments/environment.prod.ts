@@ -25,6 +25,7 @@ export const environment = {
         name: 'Couëron',
         webcamId: 'coueron1',
         codeBus: 'CBAC',
+        libelleBus: 'Bac de Couëron',
         location: {
           lat: '47.205729',
           lng: '-1.751960',
@@ -36,6 +37,7 @@ export const environment = {
         name: 'Le Pellerin',
         webcamId: 'coueron2',
         codeBus: 'LPBA',
+        libelleBus: 'Bac du Pellerin',
         location: {
           lat: '47.203055',
           lng: '-1.755171',
@@ -51,6 +53,7 @@ export const environment = {
         name: 'Basse-Indre',
         webcamId: 'indre1',
         codeBus: 'BIND',
+        libelleBus: 'Basse-Indre',
         location: {
           lat: '47.1961689',
           lng: '-1.6777476',
@@ -62,6 +65,7 @@ export const environment = {
         name: 'Indret',
         webcamId: 'indre2',
         codeBus: 'BIND',
+        libelleBus: 'Basse-Indre',
         location: {
           lat: '47.1951236',
           lng: '-1.6805797',

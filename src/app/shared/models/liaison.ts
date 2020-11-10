@@ -16,6 +16,7 @@ export interface Dock {
   name?: string;
   webcamId?: string;
   codeBus?: string;
+  libelleBus?: string;
   location?: {
     lat?: string,
     lng?: string,
