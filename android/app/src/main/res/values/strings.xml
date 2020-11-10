@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">Bacs de Loire</string>
     <string name="title_activity_main">Bacs de Loire</string>
-    <string name="package_name">com.cg44.bacsloire</string>
     <string name="custom_url_scheme">com.cg44.bacsloire</string>
     <string name="admob_app_id">ca-app-pub-9103443525270445~4441909987</string>
 </resources>
