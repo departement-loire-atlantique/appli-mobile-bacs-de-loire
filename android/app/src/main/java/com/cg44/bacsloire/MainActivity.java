@@ -1,4 +1,4 @@
-package com.cg44.bacsloire;
+package com.cg44.BacsLoire;
 
 import android.os.Bundle;
 

@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:449146789897:android:dba697606567bd2b1c98d8",
+        "mobilesdk_app_id": "1:449146789897:android:8b82cbda377881821c98d8",
         "android_client_info": {
-          "package_name": "com.cg44.bacsloire"
+          "package_name": "com.cg44.BacsLoire"
         }
       },
       "oauth_client": [
@@ -30,6 +30,13 @@
             {
               "client_id": "449146789897-ndpf6avo4mvu8nnbmkid5v9n02gr6jjj.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "449146789897-lusn56seb5k5nlelsid0egr56svdkhqh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cg44.BacsLoire"
+              }
             }
           ]
         }
