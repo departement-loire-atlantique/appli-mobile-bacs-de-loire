@@ -1,12 +1,13 @@
 import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angular/core';
+import { AdOptions } from '@capacitor-community/admob';
 import { AppState, Plugins } from '@capacitor/core';
 import { IonRouterOutlet, MenuController, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { langFr } from 'src/app/shared/models/constantesCD44';
-import { ApiService } from 'src/app/shared/services/api.service';
-import { ErrorService } from 'src/app/shared/services/error.service';
 
 import { environment } from '../../../environments/environment';
+import { langFr } from '../../shared/models/constantesCD44';
+import { ApiService } from '../../shared/services/api.service';
+import { ErrorService } from '../../shared/services/error.service';
 import { LiaisonService } from '../../shared/services/liaison.service';
 import { UtilsService } from '../../shared/services/utils.service';
 
@@ -56,17 +57,20 @@ export class HomePage implements AfterViewInit {
 
   showInterstitial() {
     if (this.platform.is('capacitor')) {
-      AdMob.prepareInterstitial({
-        adId: this.platform.is('ios') ? environment.adMobId.ios : environment.adMobId.android,
-        autoshow: true
-      });
+      const conf: AdOptions = {
+        adId: this.platform.is('ios') ? environment.adMobId.ios : environment.adMobId.android
+      };
 
-      AdMob.addListener('onAdLoaded', () => {
+      AdMob.prepareInterstitial(conf);
+
+      AdMob.addListener('onInterstitialAdLoaded', (info: boolean) => {
+        console.log('onInterstitialAdLoaded', info);
+
         AdMob.showInterstitial();
       });
 
-      AdMob.addListener('onAdFailedToLoad', (info: boolean) => {
-        console.log(info);
+      AdMob.addListener('onInterstitialAdFailedToLoad', (error) => {
+        console.log(error);
       });
     }
   }
