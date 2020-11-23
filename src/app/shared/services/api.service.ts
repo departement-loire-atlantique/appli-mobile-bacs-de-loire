@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 
 import { ApiEvent } from '../models/event';
 import { Bus } from '../models/horaire';
+import { InterstitialData } from '../models/interstitial';
 
 const { Http, Filesystem } = Plugins;
 
@@ -23,6 +24,18 @@ export class ApiService {
         mode: 'no-cors'
       };
     }
+  }
+
+  async getInterstitial(): Promise<InterstitialData> {
+    const response = await Http.request({
+      method: 'GET',
+      url: environment.secondaryApiUrl + '/traficparameter?id=mobile_intersticiel&format=json',
+      params: {
+        mode: 'no-cors'
+      }
+    });
+
+    return response.data;
   }
 
   async getEvent(from: string, to: string): Promise<ApiEvent[]> {
@@ -55,7 +68,7 @@ export class ApiService {
   async getHoraireBacs(typeLiaison: string): Promise<any> {
     const response = await Http.request({
       method: 'GET',
-      url: environment.apiUrlHoraire,
+      url: environment.secondaryApiUrl + '/traficparameter?id=bacs_horaires',
       params: this.requestParams
     });
 
