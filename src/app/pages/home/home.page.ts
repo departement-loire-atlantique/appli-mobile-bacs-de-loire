@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angular/core';
-import { AdOptions } from '@capacitor-community/admob';
 import { AppState, Plugins } from '@capacitor/core';
 import { IonRouterOutlet, MenuController, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -11,7 +10,7 @@ import { ErrorService } from '../../shared/services/error.service';
 import { LiaisonService } from '../../shared/services/liaison.service';
 import { UtilsService } from '../../shared/services/utils.service';
 
-const { App, AdMob, SplashScreen } = Plugins;
+const { App, SplashScreen } = Plugins;
 
 @Component({
   selector: 'app-home',
@@ -37,8 +36,6 @@ export class HomePage implements AfterViewInit {
     this.platform.backButton.subscribeWithPriority(10, () => {
       this.handleBackButton();
     });
-
-    this.showInterstitial();
   }
 
   ionViewWillEnter() {
@@ -52,26 +49,6 @@ export class HomePage implements AfterViewInit {
   ionViewDidLeave() {
     if (this.appStateChangeSubscription) {
       this.appStateChangeSubscription.unsubscribe();
-    }
-  }
-
-  showInterstitial() {
-    if (this.platform.is('capacitor')) {
-      const conf: AdOptions = {
-        adId: this.platform.is('ios') ? environment.adMobId.ios : environment.adMobId.android
-      };
-
-      AdMob.prepareInterstitial(conf);
-
-      AdMob.addListener('onInterstitialAdLoaded', (info: boolean) => {
-        console.log('onInterstitialAdLoaded', info);
-
-        AdMob.showInterstitial();
-      });
-
-      AdMob.addListener('onInterstitialAdFailedToLoad', (error) => {
-        console.log(error);
-      });
     }
   }
 
