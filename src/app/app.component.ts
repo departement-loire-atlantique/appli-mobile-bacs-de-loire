@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 
 import { SocialNetwork } from './shared/models/social-network';
 import { AnalyticsService } from './shared/services/analytics.service';
+import { InterstitialService } from './shared/services/interstitial.service';
 import { NotificationsService } from './shared/services/notifications.service';
 import { RemoteConfigService } from './shared/services/remote-config.service';
 
@@ -28,7 +29,8 @@ export class AppComponent {
     private router: Router,
     private analyticsService: AnalyticsService,
     private notificationService: NotificationsService,
-    private remoteConfigService: RemoteConfigService
+    private remoteConfigService: RemoteConfigService,
+    private interstitialService: InterstitialService
   ) {
     this.initializeApp();
   }
@@ -46,6 +48,8 @@ export class AppComponent {
       // Enable analytics
       this.analyticsService.enableAnalytics();
       this.analyticsService.enableCrashlytics();
+
+      this.interstitialService.init();
     });
   }
 
