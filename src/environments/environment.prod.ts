@@ -16,12 +16,13 @@ export const environment = {
   liaisons: [
     {
       id: 'clp',
-      codeHoraire: 'liaison1',
+      codeHoraire: 'liaison2',
       north: {
         name: 'Couëron',
         webcamId: 'coueron1',
         codeBus: 'CBAC',
         libelleBus: 'Bac de Couëron',
+        map: 'carte_coueron@2x.jpg',
         location: {
           lat: '47.205729',
           lng: '-1.751960',
@@ -34,6 +35,7 @@ export const environment = {
         webcamId: 'coueron2',
         codeBus: 'LPBA',
         libelleBus: 'Bac du Pellerin',
+        map: 'carte_le_pellerin@2x.jpg',
         location: {
           lat: '47.203055',
           lng: '-1.755171',
@@ -44,12 +46,13 @@ export const environment = {
     },
     {
       id: 'bii',
-      codeHoraire: 'liaison2',
+      codeHoraire: 'liaison1',
       north: {
         name: 'Basse-Indre',
         webcamId: 'indre1',
         codeBus: 'BIND',
         libelleBus: 'Basse-Indre',
+        map: 'carte_basse_indre@2x.jpg',
         location: {
           lat: '47.1961689',
           lng: '-1.6777476',
@@ -62,6 +65,7 @@ export const environment = {
         webcamId: 'indre2',
         codeBus: 'BIND',
         libelleBus: 'Basse-Indre',
+        map: 'carte_indret@2x.jpg',
         location: {
           lat: '47.1951236',
           lng: '-1.6805797',

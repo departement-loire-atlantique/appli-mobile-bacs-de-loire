@@ -16,6 +16,7 @@ export class LocalisationPage extends AbstractPage {
     lng?: string,
     placeQuery?: string
   } = {};
+  public mapsrc: string;
 
   constructor(injector: Injector, private platform: Platform) {
     super(injector);
@@ -25,6 +26,7 @@ export class LocalisationPage extends AbstractPage {
     const currentDirection = this.liaisonService.getCurrent();
     this.address = currentDirection.from.address;
     this.location = currentDirection.from.location;
+    this.mapsrc = '/assets/img/' + currentDirection.from.map;
   }
 
   openMap() {
