@@ -29,8 +29,8 @@ export class BusPage extends AbstractPage {
     this.startRequest();
 
     this.infosLiaison = this.liaisonService.getCurrent();
-
-    this.noBus = this.infosLiaison.codeHoraire === 'liaison2' && this.infosLiaison.direction === 'south';
+    
+    this.noBus = this.infosLiaison.codeHoraire === 'liaison1' && this.infosLiaison.direction === 'south';
 
     if (!this.noBus) {
       try {
