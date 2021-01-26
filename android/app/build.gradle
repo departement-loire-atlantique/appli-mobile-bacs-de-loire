@@ -6,8 +6,8 @@ android {
         applicationId "com.cg44.BacsLoire"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 59
-        versionName "2.1.4"
+        versionCode 60
+        versionName "2.1.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
