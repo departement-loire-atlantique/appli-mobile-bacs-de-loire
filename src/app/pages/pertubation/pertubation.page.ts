@@ -30,9 +30,9 @@ export class PertubationPage extends AbstractPage {
     try {
       let from: string;
       let to: string;
-      if (params.codeHoraire === 'liaison1') {
+      if (params.codeHoraire === 'liaison2') {
         from = langFr.COUERON; to = langFr.LEPELLERIN;
-      } else if (params.codeHoraire === 'liaison2') {
+      } else if (params.codeHoraire === 'liaison1') {
         from = langFr.BASSEINDRE, to = langFr.INDRET;
       }
       const apiEvents = await this.apiService.getEvent(from, to);
